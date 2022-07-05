@@ -6,16 +6,12 @@ interface API {
   getProjectById: (id: Project["id"]) => Promise<Project | undefined>
 }
 
-const getProjects: API["getProjects"] = async () => {
-  const projects = await DatabaseService.getAll<Project>("projects")
-
-  return projects
+const getProjects: API["getProjects"] = () => {
+  return DatabaseService.getAll<Project>("projects")
 }
 
-const getProjectById: API["getProjectById"] = async (id) => {
-  const project = DatabaseService.getById<Project>("projects", id)
-
-  return project ?? undefined
+const getProjectById: API["getProjectById"] = (id) => {
+  return DatabaseService.getById<Project>("projects", id)
 }
 
 export const APIService: API = {
