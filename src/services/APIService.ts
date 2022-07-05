@@ -1,29 +1,21 @@
-import { createClient } from "@supabase/supabase-js"
 import { Project } from "../types/Project"
-import { SUPABASE_KEY, SUPABASE_URL } from "../constants/Environment"
+import { DatabaseService } from "./DatabaseService"
 
 interface API {
   getProjects: () => Promise<Project[] | undefined>
   getProjectById: (id: Project["id"]) => Promise<Project | undefined>
 }
 
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
-
 const getProjects: API["getProjects"] = async () => {
-  const { data } = await supabase.from<Project>("Projects").select("*")
+  const projects = await DatabaseService.getAll<Project>("projects")
 
-  return data ?? undefined
+  return projects
 }
 
 const getProjectById: API["getProjectById"] = async (id) => {
-  const { data } = await supabase
-    .from<Project>("Projects")
-    .select("*")
-    .eq("id", id)
-    .limit(1)
-    .single()
+  const project = DatabaseService.getById<Project>("projects", id)
 
-  return data ?? undefined
+  return project ?? undefined
 }
 
 export const APIService: API = {

@@ -1,4 +1,4 @@
 export const ProjectQueryKeys = {
-  all: ["Projects"] as const,
+  all: ["projects"] as const,
   byId: (id: string) => [ProjectQueryKeys.all, id] as const,
 }
