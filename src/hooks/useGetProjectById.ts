@@ -6,6 +6,5 @@ export function useGetProjectById(id: string) {
   const { data, isLoading, error } = useQuery(ProjectQueryKeys.byId(id), () =>
     APIService.getProjectById(id),
   )
-
   return { data, isLoading, error }
 }
