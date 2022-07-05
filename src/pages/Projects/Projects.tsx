@@ -16,14 +16,17 @@ export function Projects() {
 
   return (
     <div>
-      {data?.map((project) => (
-        <div key={project.id}>
-          <button onClick={() => goToProject(project.id)}>
-            {project.name}
-          </button>
-          <p>{project.description}</p>
-        </div>
-      ))}
+      <p className="text-2xl mb-10">My Projects</p>
+      <div className="w-1/2">
+        {data?.map((project) => (
+          <div key={project.id} className="py-3">
+            <button onClick={() => goToProject(project.id)}>
+              {project.name}
+            </button>
+            <p>{project.description}</p>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

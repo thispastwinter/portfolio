@@ -16,8 +16,13 @@ export function ProjectDetail() {
 
   return (
     <div className="flex flex-col">
-      <button onClick={goBack}>Go Back</button>
-      <p>{data?.name}</p>
+      <div className="flex items-center mb-10">
+        <button className="mr-8" onClick={goBack}>
+          Go back
+        </button>
+        <p className="text-2xl">{data?.name}</p>
+      </div>
+      <p>{data?.description}</p>
     </div>
   )
 }

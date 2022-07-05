@@ -3,7 +3,7 @@ import { SUPABASE_KEY, SUPABASE_URL } from "../constants/Environment"
 
 interface Database {
   getAll: <Data>(route: string) => Promise<Data[] | undefined>
-  getById: <Data>(table: string, id: string) => Promise<Data | undefined>
+  getById: <Data>(route: string, id: string) => Promise<Data | undefined>
 }
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
