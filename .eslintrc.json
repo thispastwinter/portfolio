@@ -50,7 +50,6 @@
     {
       "files": ["./**/*.spec.*", "./**/*.test.*"],
       "extends": [
-        "plugin:cypress/recommended",
         "plugin:jest/recommended",
         "plugin:testing-library/react"
       ]

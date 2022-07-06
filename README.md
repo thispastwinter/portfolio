@@ -9,7 +9,6 @@ This project includes configuration and tooling that conforms to Crema's baselin
 **🧰 Tools Used**
 
 - [Create React App](https://facebook.github.io/create-react-app/) for simple configuration 😅
-- [Cypress](https://www.cypress.io) for end-to-end testing
 - [ESLint](https://eslint.org) for code linting
 - [Husky](https://github.com/typicode/husky/tree/master) for running tasks via git hooks
 - [Hygen](http://www.hygen.io) for component and util generators
@@ -71,12 +70,6 @@ Below is the project's file-tree with notes added as inline comments.
 .
 ├── .github # 👈 PR/Issue Templates, workflows, and Renovate config
 ├── .storybook # 👈 Storybook config
-├── cypress # 👈 Cypress integration testing
-│   ├── fixtures # 👈 Test data
-│   │   └── example.json
-│   ├── integration # 👈 Tests go here
-│   │   └── sample_spec.ts
-│   └── ...
 ├── public # 👈 Static files
 ├── src
 │   ├── assets # 👈 fonts, images, etc.
@@ -107,7 +100,6 @@ Below is the project's file-tree with notes added as inline comments.
 ├── .prettierrc.js # 👈  Prettier - Run Commands
 ├── LICENSE # 👈  LICENSE 😜
 ├── README.md # 👈 👈 👈  YOU ARE HERE
-├── cypress.json # 👈  Cypress config
 ├── package-lock.json
 ├── package.json
 └── tsconfig.json # 👈  TypeScript config and extends
