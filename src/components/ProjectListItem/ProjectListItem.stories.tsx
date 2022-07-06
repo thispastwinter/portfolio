@@ -29,5 +29,6 @@ Default.args = {
     created_at: "",
     id: "1",
     image: "asdf",
+    categories: [],
   },
 }
