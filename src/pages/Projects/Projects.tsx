@@ -16,9 +16,9 @@ export function Projects() {
   }
 
   return (
-    <div>
-      <p className="text-2xl mb-10 p-4">My Projects</p>
-      <div className="max-w-xl">
+    <div className="flex flex-col">
+      <p className="text-4xl mb-10 font-display2">Recent work</p>
+      <div className="grid lg:grid-rows lg:grid-flow-col gap-6 max-h-full">
         {data?.map((project, index) => (
           <div
             role="button"
@@ -29,7 +29,7 @@ export function Projects() {
             }
             onClick={() => goToProject(project.id)}
           >
-            <ProjectListItem className="p-4" project={project} />
+            <ProjectListItem project={project} />
           </div>
         ))}
       </div>

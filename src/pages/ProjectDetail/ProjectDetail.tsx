@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom"
+import { Icon } from "../../components/Icon"
 import { useGetProjectById } from "../../hooks/useGetProjectById"
 
 export function ProjectDetail() {
@@ -10,10 +11,21 @@ export function ProjectDetail() {
   }
 
   return (
-    <div className="flex flex-col p-4">
-      <p className="text-2xl mb-10">{data?.name}</p>
-      <img className="rounded-md py-4" alt={data?.name} src={data?.image} />
-      <p>{data?.description}</p>
+    <div className="flex flex-col">
+      <div className="flex flex-col mb-6">
+        <p className="text-4xl font-display2 mb-4">{data?.name}</p>
+        <div className="flex gap-2">
+          {data?.categories.map(({ icon_name }) => (
+            <Icon size={24} key={icon_name} name={icon_name} />
+          ))}
+        </div>
+      </div>
+      <img
+        className="border rounded-lg max-w-xs"
+        alt={data?.name}
+        src={data?.image}
+      />
+      <p className="mt-6">{data?.description}</p>
     </div>
   )
 }

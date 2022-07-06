@@ -3,11 +3,9 @@ import { Header } from "../components/Header"
 
 export function MainLayout() {
   return (
-    <div>
+    <div className="flex flex-col p-8">
       <Header />
-      <div className="flex p-4">
-        <Outlet />
-      </div>
+      <Outlet />
     </div>
   )
 }
