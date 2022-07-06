@@ -17,13 +17,13 @@ export function ProjectListItem({ project, className }: ProjectListItemProps) {
     >
       <p className="text-2xl font-medium mb-6">{project.name}</p>
       <div className="mb-8 border-b -mx-6" />
-      <div className="flex">
+      <div className="flex flex-wrap md:flex-nowrap">
         <img
           alt={project.name}
           src={project.image}
-          className="rounded-lg w-1/4 h-1/4 mr-4 border"
+          className="rounded-lg md:w-1/4 h-1/4 mr-4 border"
         />
-        <div>
+        <div className="flex flex-col mt-4 md:mt-0">
           <p>{project.description}</p>
           {project.categories.length ? (
             <div>
