@@ -18,7 +18,7 @@ export function Projects() {
   return (
     <div>
       <p className="text-2xl mb-10 p-4">My Projects</p>
-      <div className="w-1/2">
+      <div className="max-w-xl">
         {data?.map((project, index) => (
           <div
             role="button"
