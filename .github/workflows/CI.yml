@@ -29,7 +29,6 @@ jobs:
       - run: npm run test:deps
       - run: npm run test:types
       - run: npm run test:unit
-      - run: npm run test:e2e:ci
 
   Test:
     if: ${{ github.repository != 'cremalab/app-web' }}
@@ -50,7 +49,6 @@ jobs:
       - run: npm run test:deps
       - run: npm run test:types
       - run: npm run test:unit
-      - run: npm run test:e2e:ci
 
   Coverage:
     runs-on: ubuntu-latest
