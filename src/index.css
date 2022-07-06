@@ -1,6 +1,19 @@
+@font-face {
+  font-family: "PatuaOne";
+  src: local("PatuaOne"), url(./assets/fonts/PatuaOne-Regular.ttf) format("woff");
+  /* other formats include: 'woff2', 'truetype, 'opentype',                     'embedded-opentype', and 'svg' */
+}
+
+@font-face {
+  font-family: "BebasNeue";
+  src: local("BebasNeue"), url(./assets/fonts/BebasNeue-Regular.ttf) format("woff");
+  /* other formats include: 'woff2', 'truetype, 'opentype',                     'embedded-opentype', and 'svg' */
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 html {
   box-sizing: border-box;
