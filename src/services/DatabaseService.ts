@@ -1,39 +1,53 @@
 import { createClient } from "@supabase/supabase-js"
 import { SUPABASE_KEY, SUPABASE_URL } from "../constants/Environment"
+import { AnyObject } from "../types/AnyObject"
 
-type RelationShip<Table> = {
-  name: string
-  values: Array<keyof Table>
-}
-
+type Fields<Data = AnyObject, Relationship = AnyObject> = Array<
+  keyof Data | { name: string; fields: Array<keyof Relationship> }
+>
 interface Database {
-  getAll: <Data, Table = unknown>(
+  getAll: <Data, Relationship = AnyObject>(
     route: string,
-    relationship?: RelationShip<Table>,
+    fields?: Fields<Data, Relationship>,
   ) => Promise<Data[] | undefined>
-  getById: <Data, Table = unknown>(
+  getById: <Data, Relationship = AnyObject>(
     route: string,
     id: string,
-    relationship?: RelationShip<Table>,
+    fields?: Fields<Data, Relationship>,
   ) => Promise<Data | undefined>
 }
 
-const getRelationshipQuery = <Table>(relationship?: RelationShip<Table>) =>
-  `${relationship?.name}(${relationship?.values.join(",")})`
+const getQueryFields = (fields: Fields) => {
+  return fields
+    .map((field) => {
+      if (typeof field === "object") {
+        return `${field.name}(${field.fields.join(",")})`
+      } else {
+        return field
+      }
+    })
+    .join(",")
+}
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
-const getAll: Database["getAll"] = async (route, relationship) => {
-  const { data } = await supabase
-    .from(route)
-    .select(`*, ${getRelationshipQuery(relationship)})`)
+const getAll: Database["getAll"] = async (route, fields) => {
+  let queryFields = "*"
+  if (fields) {
+    queryFields = getQueryFields(fields)
+  }
+  const { data } = await supabase.from(route).select(queryFields)
   return data ?? undefined
 }
 
-const getById: Database["getById"] = async (route, id, relationship) => {
+const getById: Database["getById"] = async (route, id, fields) => {
+  let queryFields = "*"
+  if (fields) {
+    queryFields = getQueryFields(fields)
+  }
   const { data } = await supabase
     .from(route)
-    .select(`*, ${getRelationshipQuery(relationship)})`)
+    .select(`${queryFields}`)
     .eq("id", id)
     .limit(1)
     .single()

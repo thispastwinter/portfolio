@@ -8,17 +8,23 @@ interface API {
 }
 
 const getProjects: API["getProjects"] = () => {
-  return DatabaseService.getAll<Project, Category>("projects", {
-    name: "categories",
-    values: ["name", "id", "icon_name"],
-  })
+  return DatabaseService.getAll<Project, Category>("projects", [
+    "description",
+    "id",
+    "image",
+    "name",
+    { name: "categories", fields: ["name", "icon_name"] },
+  ])
 }
 
 const getProjectById: API["getProjectById"] = (id) => {
-  return DatabaseService.getById<Project, Category>("projects", id, {
-    name: "categories",
-    values: ["name", "id", "icon_name"],
-  })
+  return DatabaseService.getById<Project, Category>("projects", id, [
+    "description",
+    "id",
+    "image",
+    "name",
+    { name: "categories", fields: ["name", "icon_name"] },
+  ])
 }
 
 export const APIService: API = {
