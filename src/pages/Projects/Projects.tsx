@@ -4,7 +4,6 @@ import { useGetProjects } from "../../hooks/useGetProjects"
 
 export function Projects() {
   const { data, isLoading } = useGetProjects()
-
   const navigate = useNavigate()
 
   const goToProject = (id: string) => {

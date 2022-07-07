@@ -1,6 +1,13 @@
+import classNames from "classnames"
+import { useMatch } from "react-router-dom"
+
 export function Header() {
+  const match = useMatch("/projects/:id")
+
   return (
-    <div className="mb-10">
+    <div
+      className={classNames({ "invisible h-0": match }, "md:visible md:h-auto")}
+    >
       <div className="mb-8">
         <div className="flex flex-wrap mb-6">
           <p className="text-8xl font-display1 ml-4 mr-6">Justin</p>

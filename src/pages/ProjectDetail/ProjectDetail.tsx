@@ -13,7 +13,7 @@ export function ProjectDetail() {
   return (
     <div className="flex flex-col">
       <div className="flex flex-col mb-6">
-        <p className="text-4xl font-display2 mb-4">{data?.name}</p>
+        <p className="text-8xl md:text-4xl font-display2 mb-4">{data?.name}</p>
         <div className="flex gap-2">
           {data?.categories.map(({ icon_name }) => (
             <Icon size={24} key={icon_name} name={icon_name} />
