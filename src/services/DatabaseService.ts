@@ -17,34 +17,33 @@ interface Database {
   ) => Promise<Data | undefined>
 }
 
-const getQueryFields = (fields: Fields) => {
-  return fields
-    .map((field) => {
-      if (typeof field === "object") {
-        return `${field.name}(${field.fields.join(",")})`
-      } else {
-        return field
-      }
-    })
-    .join(",")
+const getQueryFields = (fields?: Fields) => {
+  if (fields) {
+    return fields
+      .map((field) => {
+        if (typeof field === "object") {
+          return `${field.name}(${field.fields.join(",")})`
+        } else {
+          return field
+        }
+      })
+      .join(",")
+  } else {
+    // if fields is undefined, return wildcard
+    return "*"
+  }
 }
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
 const getAll: Database["getAll"] = async (route, fields) => {
-  let queryFields = "*"
-  if (fields) {
-    queryFields = getQueryFields(fields)
-  }
+  const queryFields = getQueryFields(fields)
   const { data } = await supabase.from(route).select(queryFields)
   return data ?? undefined
 }
 
 const getById: Database["getById"] = async (route, id, fields) => {
-  let queryFields = "*"
-  if (fields) {
-    queryFields = getQueryFields(fields)
-  }
+  const queryFields = getQueryFields(fields)
   const { data } = await supabase
     .from(route)
     .select(`${queryFields}`)
