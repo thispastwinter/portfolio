@@ -9,7 +9,7 @@ interface API {
 
 const getProjects: API["getProjects"] = () => {
   return DatabaseService.getAll<Project, Category>("projects", [
-    "description",
+    "short_description",
     "id",
     "image",
     "name",
@@ -20,6 +20,7 @@ const getProjects: API["getProjects"] = () => {
 const getProjectById: API["getProjectById"] = (id) => {
   return DatabaseService.getById<Project, Category>("projects", id, [
     "description",
+    "url",
     "id",
     "image",
     "name",
