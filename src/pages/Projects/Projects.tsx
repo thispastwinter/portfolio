@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { ProjectListItem } from "../../components/ProjectListItem"
+import { Spinner } from "../../components/Spinner"
 import { useGetProjects } from "../../hooks/useGetProjects"
 
 export function Projects() {
@@ -11,7 +12,11 @@ export function Projects() {
   }
 
   if (isLoading) {
-    return <p>Loading...</p>
+    return (
+      <div className="flex justify-center items-center">
+        <Spinner />
+      </div>
+    )
   }
 
   return (
