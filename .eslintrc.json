@@ -49,10 +49,7 @@
     // Test files.
     {
       "files": ["./**/*.spec.*", "./**/*.test.*"],
-      "extends": [
-        "plugin:jest/recommended",
-        "plugin:testing-library/react"
-      ]
+      "extends": ["plugin:jest/recommended", "plugin:testing-library/react"]
     },
     // Stories.
     {
