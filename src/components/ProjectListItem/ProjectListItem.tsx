@@ -11,12 +11,12 @@ export function ProjectListItem({ project, className }: ProjectListItemProps) {
   return (
     <div
       className={classNames(
-        "p-6 rounded-lg drop-shadow-lg border bg-slate-50 w-full h-full",
+        "p-4 rounded-lg drop-shadow-sm border bg-slate-50 w-full h-full",
         className,
       )}
     >
       <p className="text-2xl font-medium mb-6">{project.name}</p>
-      <div className="mb-8 border-b -mx-6" />
+      <div className="mb-8 border-b -mx-4" />
       <div className="flex flex-wrap md:flex-nowrap">
         <img
           alt={project.name}

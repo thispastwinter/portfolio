@@ -6,7 +6,7 @@ export function MainLayout() {
   useScrollToTop()
 
   return (
-    <div className="flex flex-col m-8">
+    <div className="flex flex-col m-4">
       <Header />
       <Outlet />
     </div>

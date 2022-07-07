@@ -17,7 +17,7 @@ export function Projects() {
   return (
     <div className="flex flex-col">
       <p className="text-4xl mb-10 font-display2">Recent work</p>
-      <div className="grid lg:grid-rows lg:grid-flow-col gap-6 max-h-full">
+      <div className="grid lg:grid-rows lg:grid-flow-col gap-4 max-h-full">
         {data?.map((project, index) => (
           <div
             role="button"
