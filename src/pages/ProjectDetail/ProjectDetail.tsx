@@ -37,8 +37,8 @@ export function ProjectDetail() {
             {data?.name}
           </p>
           <div className="flex gap-2">
-            {data?.categories.map(({ icon_name }) => (
-              <Icon size={24} key={icon_name} name={icon_name} />
+            {data?.categories.map(({ icon_name, name }) => (
+              <Icon title={name} size={24} key={icon_name} name={icon_name} />
             ))}
           </div>
           <a

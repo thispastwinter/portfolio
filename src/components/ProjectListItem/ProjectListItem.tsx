@@ -23,8 +23,13 @@ export function ProjectListItem({ project, className }: ProjectListItemProps) {
             <div>
               <p className="my-2 font-medium">Stack:</p>
               <div className="flex gap-2">
-                {project.categories.map(({ icon_name }) => (
-                  <Icon size={20} key={icon_name} name={icon_name} />
+                {project.categories.map(({ icon_name, name }) => (
+                  <Icon
+                    title={name}
+                    size={20}
+                    key={icon_name}
+                    name={icon_name}
+                  />
                 ))}
               </div>
             </div>
