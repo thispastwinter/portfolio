@@ -50,7 +50,7 @@ export function ProjectDetail() {
             Visit Website{" "}
             <Icon size={20} className="ml-1" name="arrowUpRight" />
           </a>
-          <p className="mt-6">{data?.description}</p>
+          <p className="mt-4">{data?.description}</p>
         </div>
       </div>
     </div>
