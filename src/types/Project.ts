@@ -1,4 +1,5 @@
 import { Category } from "./Category"
+import { ContentBlock } from "./ContentBlock"
 
 export type Project = {
   id: string
@@ -9,4 +10,5 @@ export type Project = {
   url?: string
   image?: string
   categories: Category[]
+  content_blocks?: ContentBlock[]
 }
