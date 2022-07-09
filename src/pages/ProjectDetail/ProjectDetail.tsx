@@ -9,7 +9,7 @@ export function ProjectDetail() {
   const navigate = useNavigate()
 
   const goBack = () => {
-    navigate(-1)
+    navigate("../")
   }
 
   if (isLoading) {
