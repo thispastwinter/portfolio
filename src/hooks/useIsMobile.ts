@@ -11,6 +11,11 @@ export const useIsMobile = (mobileSize = 768) => {
     }
   }, [mobileSize])
 
+  // set initial state
+  useEffect(() => {
+    handleWindowSizeChange()
+  }, [handleWindowSizeChange])
+
   useEffect(() => {
     window.addEventListener("resize", handleWindowSizeChange)
     return () => {
