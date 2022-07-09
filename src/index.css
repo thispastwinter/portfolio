@@ -26,7 +26,8 @@ html *:after {
   box-sizing: inherit;
 }
 
-html, body {
+html,
+body {
   overflow-x: hidden;
 }
 
