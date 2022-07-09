@@ -1,6 +1,7 @@
 import decoratorCentered from "@storybook/addon-centered"
 import { Story } from "@storybook/react"
 import { ComponentProps } from "react"
+import { Route, Routes } from "react-router-dom"
 import { NavLink } from "./NavLink"
 
 /**
@@ -17,8 +18,30 @@ const Template: Story<ComponentProps<typeof NavLink>> = (args) => (
   <NavLink {...args} />
 )
 
-export const Default = Template.bind({})
+export const Active = Template.bind({})
 
-Default.args = {
-  to: "",
+Active.decorators = [
+  (Story) => (
+    <Routes>
+      <Route path="/projects" element={<Story />} />
+    </Routes>
+  ),
+]
+
+Active.args = {
+  to: "/projects",
+  children: "Recent Work",
+}
+
+Active.parameters = {
+  memoryRouter: {
+    initialEntries: ["/projects"],
+  },
+}
+
+export const InActive = Template.bind({})
+
+InActive.args = {
+  to: "/about",
+  children: "About",
 }

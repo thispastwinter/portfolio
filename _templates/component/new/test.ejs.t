@@ -11,7 +11,7 @@ describe("<%= name %>", () => {
   it.todo(`add meaningful tests 👍`)
 })
 <% } else if(useState) { -%>
-import { render, fireEvent, screen } from "@testing-library/react"
+import { render, fireEvent, screen } from "../../testing/test-utils"
 
 describe("<%= name %>", () => {
   it("name prop is rendered", () => {
@@ -54,7 +54,7 @@ describe("<%= name %>", () => {
   })
 })
 <% } else { -%>
-import { render, screen } from "@testing-library/react"
+import { render, screen } from "../../testing/test-utils"
 
 describe("<%= name %>", () => {
   it("name prop is rendered", () => {
@@ -62,7 +62,7 @@ describe("<%= name %>", () => {
     const message = "Hi, my name is <%= name %>!"
 
     // Act
-    const render(<<%= name %> name="<%= name %>" />)
+    render(<<%= name %> name="<%= name %>" />)
     const received = screen.getByText(message)
 
     // Assert

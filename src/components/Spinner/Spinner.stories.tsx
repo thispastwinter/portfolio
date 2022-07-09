@@ -7,7 +7,7 @@ import { Spinner } from "./Spinner"
  */
 
 export default {
-  title: "Spinner",
+  title: "Components/Spinner",
   decorators: [decoratorCentered],
 }
 

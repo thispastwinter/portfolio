@@ -1,4 +1,5 @@
-import decoratorCentered from "@storybook/addon-centered"
+import { Story } from "@storybook/react"
+import { ComponentProps } from "react"
 import { Header } from "./Header"
 
 /**
@@ -7,8 +8,21 @@ import { Header } from "./Header"
  */
 
 export default {
-  title: "Header",
-  decorators: [decoratorCentered],
+  title: "Components/Header",
 }
 
-export const Example = () => <Header />
+const Template: Story<ComponentProps<typeof Header>> = (args) => (
+  <Header {...args} />
+)
+
+export const Default = Template.bind({})
+
+Default.parameters = {
+  memoryRouter: {
+    initialEntries: ["/projects"],
+  },
+}
+
+Default.args = {
+  isHidden: false,
+}
