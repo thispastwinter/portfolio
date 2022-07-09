@@ -10,7 +10,7 @@ const customRender = (
     ComponentProps<typeof TestProvider>,
 ) =>
   render(component, {
-    wrapper: (props: any) => (
+    wrapper: (props: Record<string, unknown>) => (
       <TestProvider initialEntries={options?.initialEntries} {...props} />
     ),
     ...options,
