@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { Icon } from "../../components/Icon"
+import { Spinner } from "../../components/Spinner"
 import { useGetProjectById } from "../../hooks/useGetProjectById"
 
 export function ProjectDetail() {
@@ -12,7 +13,11 @@ export function ProjectDetail() {
   }
 
   if (isLoading) {
-    return <p>Loading...</p>
+    return (
+      <div className="flex justify-center items-center h-[100vh] md:h-auto">
+        <Spinner />
+      </div>
+    )
   }
 
   return (
@@ -32,11 +37,20 @@ export function ProjectDetail() {
             {data?.name}
           </p>
           <div className="flex gap-2">
-            {data?.categories.map(({ icon_name }) => (
-              <Icon size={24} key={icon_name} name={icon_name} />
+            {data?.categories.map(({ icon_name, name }) => (
+              <Icon title={name} size={24} key={icon_name} name={icon_name} />
             ))}
           </div>
-          <p className="mt-6">{data?.description}</p>
+          <a
+            className="flex items-center mt-4 mr-1 font-bold"
+            target="_blank"
+            href={data?.url}
+            rel="noreferrer"
+          >
+            Visit Website{" "}
+            <Icon size={20} className="ml-1" name="arrowUpRight" />
+          </a>
+          <p className="mt-4">{data?.description}</p>
         </div>
       </div>
     </div>

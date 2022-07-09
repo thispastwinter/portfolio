@@ -13,6 +13,7 @@ export function App() {
         <Routes>
           <Route path="/" element={<MainLayout />}>
             <Route index element={<Navigate to="/projects" replace />} />
+            <Route path="/about" element={<div />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/projects/:id" element={<ProjectDetail />} />
           </Route>

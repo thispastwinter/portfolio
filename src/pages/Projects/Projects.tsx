@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { ProjectListItem } from "../../components/ProjectListItem"
+import { Spinner } from "../../components/Spinner"
 import { useGetProjects } from "../../hooks/useGetProjects"
 
 export function Projects() {
@@ -11,12 +12,16 @@ export function Projects() {
   }
 
   if (isLoading) {
-    return <p>Loading...</p>
+    return (
+      <div className="flex justify-center items-center">
+        <Spinner />
+      </div>
+    )
   }
 
   return (
     <div className="flex flex-col">
-      <p className="text-4xl mb-10 font-display2">Recent work</p>
+      <p className="text-4xl mb-10 font-display2 md:hidden">Recent work</p>
       <div className="grid lg:grid-rows lg:grid-flow-col gap-4 max-h-full">
         {data?.map((project, index) => (
           <div
