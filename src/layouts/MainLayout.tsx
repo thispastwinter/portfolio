@@ -12,7 +12,7 @@ export function MainLayout() {
   const isHidden = useMemo(() => Boolean(match) && isMobile, [match, isMobile])
 
   return (
-    <div className="flex flex-col m-4 h-[100vh]">
+    <div className="flex flex-col m-4">
       <Header isHidden={isHidden} />
       <Outlet />
     </div>
