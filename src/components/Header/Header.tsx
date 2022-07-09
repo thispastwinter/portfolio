@@ -1,4 +1,3 @@
-import classNames from "classnames"
 import { URL } from "../../constants/URL"
 import { NavLink } from "../NavLink"
 
@@ -7,8 +6,8 @@ interface HeaderProps {
 }
 
 export function Header({ isHidden = false }: HeaderProps) {
-  return (
-    <div className={classNames({ hidden: isHidden }, "md:h-auto md:mb-16")}>
+  return !isHidden ? (
+    <div className="md:h-auto md:mb-16">
       <div className="mb-4">
         <div className="flex flex-wrap mb-4 max-w-sm">
           <p className="text-8xl font-display1 ml-1.5 text-slate-600 drop-shadow-lg">
@@ -32,5 +31,5 @@ export function Header({ isHidden = false }: HeaderProps) {
         </div>
       </nav>
     </div>
-  )
+  ) : null
 }

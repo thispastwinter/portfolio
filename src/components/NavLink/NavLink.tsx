@@ -15,14 +15,22 @@ export function NavLink({ children, to }: NavLinkProps) {
 
   const isExternalLink = to.includes("https")
 
+  const ariaLabel = `navigate to ${to}`
+
   return !isExternalLink ? (
-    <RouterNavLink to={to}>
+    <RouterNavLink aria-label={ariaLabel} to={to}>
       {({ isActive }) => (
         <div className={getClassName(isActive)}>{children}</div>
       )}
     </RouterNavLink>
   ) : (
-    <a className={getClassName()} href={to} target="_blank" rel="noreferrer">
+    <a
+      aria-label={ariaLabel}
+      className={getClassName()}
+      href={to}
+      target="_blank"
+      rel="noreferrer"
+    >
       {children}
     </a>
   )

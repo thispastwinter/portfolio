@@ -7,7 +7,7 @@ export function MainLayout() {
   useScrollToTop()
 
   return (
-    <div className="flex flex-col m-4">
+    <div className="flex flex-col m-4 h-[100vh]">
       <Header isHidden={Boolean(match)} />
       <Outlet />
     </div>

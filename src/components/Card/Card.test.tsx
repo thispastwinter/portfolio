@@ -1,7 +1,16 @@
+import { render, screen } from "../../testing/test-utils"
 import { Card } from "./Card"
 
 describe("Card", () => {
-  it("is defined", expect(Card).toBeDefined)
+  it("renders children", () => {
+    // Arrange
+    const text = "This is a card."
 
-  it.todo(`add meaningful tests 👍`)
+    // Act
+    render(<Card>{text}</Card>)
+    const received = screen.getByText(text)
+
+    // Assert
+    expect(received).toBeInTheDocument()
+  })
 })
