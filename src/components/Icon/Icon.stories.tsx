@@ -29,4 +29,5 @@ export const Default = Template.bind({})
 
 Default.args = {
   name: iconNames[0],
+  size: 64,
 }

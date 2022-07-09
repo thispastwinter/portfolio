@@ -1,13 +1,14 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, useMatch } from "react-router-dom"
 import { Header } from "../components/Header"
 import { useScrollToTop } from "../hooks/useScrollToTop"
 
 export function MainLayout() {
+  const match = useMatch("/projects/:id")
   useScrollToTop()
 
   return (
     <div className="flex flex-col m-4">
-      <Header />
+      <Header isHidden={Boolean(match)} />
       <Outlet />
     </div>
   )
