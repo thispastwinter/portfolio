@@ -33,4 +33,5 @@ export const project: Project = {
       created_at: "",
     },
   ],
+  content_blocks: [],
 }
