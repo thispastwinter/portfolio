@@ -1,10 +1,11 @@
+import { ComponentProps } from "react"
 import { ContentBlock as ContentBlockType } from "../../types/ContentBlock"
 import { Icon } from "../Icon"
 
-export type ContentBlockProps = Omit<
-  ContentBlockType,
-  "order" | "created_at" | "id"
->
+export interface ContentBlockProps
+  extends Omit<ContentBlockType, "order" | "created_at" | "id"> {
+  containerProps?: ComponentProps<"div">
+}
 
 const ContentBlockMap: {
   [key in ContentBlockType["type"]]: (
@@ -13,7 +14,6 @@ const ContentBlockMap: {
 } = {
   image: (props) => (
     <img
-      className="py-4"
       src={props.value}
       alt={props.alt_text}
       data-testid={props.data_testid}
@@ -23,19 +23,19 @@ const ContentBlockMap: {
     <p data-testid={props.data_testid}>{props.display_value}</p>
   ),
   sub_title: (props) => (
-    <p data-testid={props.data_testid} className="text-lg py-2">
+    <p data-testid={props.data_testid} className="text-lg">
       {props.display_value}
     </p>
   ),
   title: (props) => (
-    <p data-testid={props.data_testid} className="text-2xl font-medium py-2">
+    <p data-testid={props.data_testid} className="text-2xl font-medium">
       {props.display_value}
     </p>
   ),
   url: (props) => (
     <a
       data-testid={props.data_testid}
-      className="flex items-center mt-4 mr-1 font-bold"
+      className="flex items-center font-bold"
       target="_blank"
       href={props.value}
       rel="noreferrer"
@@ -49,5 +49,9 @@ const ContentBlockMap: {
 export function ContentBlock({ type, ...rest }: ContentBlockProps) {
   const Content = ContentBlockMap[type]
 
-  return <Content {...rest} data_testid="content_block" />
+  return (
+    <div {...rest.containerProps}>
+      <Content {...rest} data_testid="content_block" />
+    </div>
+  )
 }

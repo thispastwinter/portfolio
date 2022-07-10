@@ -1,4 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom"
+import { ContentBlocks } from "../../components/ContentBlocks"
 import { Icon } from "../../components/Icon"
 import { Spinner } from "../../components/Spinner"
 import { useGetProjectById } from "../../hooks/useGetProjectById"
@@ -27,30 +28,38 @@ export function ProjectDetail() {
         <p className="text-xl">Projects</p>
       </button>
       <div className="flex flex-wrap md:flex-nowrap">
-        <img
-          className="border rounded-lg max-w-xs mr-4"
-          alt={data?.name}
-          src={data?.image}
-        />
-        <div className="flex flex-col">
-          <p className="text-8xl md:text-4xl font-display2 my-4 md:my-0 md:mb-4">
-            {data?.name}
-          </p>
-          <div className="flex gap-2">
-            {data?.categories.map(({ icon_name, name }) => (
-              <Icon title={name} size={24} key={icon_name} name={icon_name} />
-            ))}
+        <div className="flex flex-wrap md:flex-nowrap">
+          <div className="md:pr-4 max-w-lg w-full md:border-r">
+            <img
+              className="border rounded-lg mb-4"
+              alt={data?.name}
+              src={data?.image}
+            />
+            <a
+              className="flex items-center mr-1 mb-4 font-bold"
+              target="_blank"
+              href={data?.url}
+              rel="noreferrer"
+            >
+              Visit Website
+              <Icon size={20} className="ml-1" name="arrowUpRight" />
+            </a>
+            <p className="mb-4 font-medium">Stack:</p>
+            <div className="flex gap-2 mb-4 md:mb-0">
+              {data?.categories.map(({ icon_name, name }) => (
+                <Icon title={name} size={24} key={icon_name} name={icon_name} />
+              ))}
+            </div>
           </div>
-          <a
-            className="flex items-center mt-4 mr-1 font-bold"
-            target="_blank"
-            href={data?.url}
-            rel="noreferrer"
-          >
-            Visit Website{" "}
-            <Icon size={20} className="ml-1" name="arrowUpRight" />
-          </a>
-          <p className="mt-4">{data?.description}</p>
+          <div className="md:pl-4">
+            <p className="text-8xl md:text-4xl font-display2 md:my-0 my-6">
+              {data?.name}
+            </p>
+            <ContentBlocks
+              contentBlocks={data?.content_blocks || []}
+              containerProps={{ className: "pb-4" }}
+            />
+          </div>
         </div>
       </div>
     </div>
