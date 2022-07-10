@@ -29,37 +29,42 @@ export function ProjectDetail() {
       </button>
       <div className="flex flex-wrap md:flex-nowrap">
         <div className="flex flex-wrap md:flex-nowrap">
-          <div className="md:pr-4 max-w-lg w-full md:border-r">
+          <div className="flex flex-col md:pr-4 max-w-lg w-full md:border-r">
             <img
-              className="border rounded-lg mb-4"
+              className="border rounded-lg"
               alt={data?.name}
               src={data?.image}
             />
-            <a
-              className="flex items-center mr-1 mb-4 font-bold"
-              target="_blank"
-              href={data?.url}
-              rel="noreferrer"
-            >
-              Visit Website
-              <Icon size={20} className="ml-1" name="arrowUpRight" />
-            </a>
-            <p className="mb-4 font-medium">Stack:</p>
-            <div className="flex gap-2 mb-4 md:mb-0">
-              {data?.categories.map(({ icon_name, name }) => (
-                <Icon title={name} size={24} key={icon_name} name={icon_name} />
-              ))}
+            <div className="flex justify-between md:justify-start md:flex-col gap-y-4 my-4">
+              <a
+                className="flex items-center font-medium"
+                target="_blank"
+                href={data?.url}
+                rel="noreferrer"
+              >
+                Website
+                <Icon size={20} className="ml-1" name="arrowUpRight" />
+              </a>
+              <div className="flex gap-x-2">
+                {data?.categories.map(({ icon_name, name }) => (
+                  <Icon
+                    title={name}
+                    size={24}
+                    key={icon_name}
+                    name={icon_name}
+                  />
+                ))}
+              </div>
             </div>
           </div>
-          <div className="md:pl-4">
-            <p className="text-8xl md:text-4xl font-display2 md:my-0 my-6">
-              {data?.name}
-            </p>
-            <ContentBlocks
-              contentBlocks={data?.content_blocks || []}
-              containerProps={{ className: "pb-4" }}
-            />
-          </div>
+          <article className="md:pl-4">
+            <div className="mb-12">
+              <p className="text-8xl md:text-4xl font-display2">{data?.name}</p>
+            </div>
+            <div className="flex flex-col gap-y-4">
+              <ContentBlocks contentBlocks={data?.content_blocks || []} />
+            </div>
+          </article>
         </div>
       </div>
     </div>
