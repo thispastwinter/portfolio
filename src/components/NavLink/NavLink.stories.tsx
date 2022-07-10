@@ -39,9 +39,9 @@ Active.parameters = {
   },
 }
 
-export const InActive = Template.bind({})
+export const Inactive = Template.bind({})
 
-InActive.args = {
+Inactive.args = {
   to: "/about",
   children: "About",
 }

@@ -1,4 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom"
+import { ContentBlocks } from "../../components/ContentBlocks"
 import { Icon } from "../../components/Icon"
 import { Spinner } from "../../components/Spinner"
 import { useGetProjectById } from "../../hooks/useGetProjectById"
@@ -9,7 +10,7 @@ export function ProjectDetail() {
   const navigate = useNavigate()
 
   const goBack = () => {
-    navigate(-1)
+    navigate("../")
   }
 
   if (isLoading) {
@@ -27,30 +28,43 @@ export function ProjectDetail() {
         <p className="text-xl">Projects</p>
       </button>
       <div className="flex flex-wrap md:flex-nowrap">
-        <img
-          className="border rounded-lg max-w-xs mr-4"
-          alt={data?.name}
-          src={data?.image}
-        />
-        <div className="flex flex-col">
-          <p className="text-8xl md:text-4xl font-display2 my-4 md:my-0 md:mb-4">
-            {data?.name}
-          </p>
-          <div className="flex gap-2">
-            {data?.categories.map(({ icon_name, name }) => (
-              <Icon title={name} size={24} key={icon_name} name={icon_name} />
-            ))}
+        <div className="flex flex-wrap md:flex-nowrap">
+          <div className="flex flex-col md:pr-4 max-w-lg w-full md:border-r">
+            <img
+              className="border rounded-lg"
+              alt={data?.name}
+              src={data?.image}
+            />
+            <div className="flex justify-between md:justify-start md:flex-col gap-y-4 my-4">
+              <a
+                className="flex items-center font-medium"
+                target="_blank"
+                href={data?.url}
+                rel="noreferrer"
+              >
+                Website
+                <Icon size={20} className="ml-1" name="arrowUpRight" />
+              </a>
+              <div className="flex gap-x-2">
+                {data?.categories.map(({ icon_name, name }) => (
+                  <Icon
+                    title={name}
+                    size={24}
+                    key={icon_name}
+                    name={icon_name}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
-          <a
-            className="flex items-center mt-4 mr-1 font-bold"
-            target="_blank"
-            href={data?.url}
-            rel="noreferrer"
-          >
-            Visit Website{" "}
-            <Icon size={20} className="ml-1" name="arrowUpRight" />
-          </a>
-          <p className="mt-4">{data?.description}</p>
+          <article className="md:pl-4">
+            <div className="mb-12">
+              <p className="text-8xl md:text-4xl font-display2">{data?.name}</p>
+            </div>
+            <div className="flex flex-col gap-y-4">
+              <ContentBlocks contentBlocks={data?.content_blocks || []} />
+            </div>
+          </article>
         </div>
       </div>
     </div>

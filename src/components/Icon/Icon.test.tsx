@@ -11,15 +11,13 @@ describe("Icon", () => {
     render(
       <div>
         {icons.map((iconName) => (
-          <Icon
-            data-testid={`icon_${iconName}`}
-            key={iconName}
-            name={iconName}
-          />
+          <Icon key={iconName} name={iconName} />
         ))}
       </div>,
     )
-    const receivedIcons = screen.getAllByTestId(testIdMatch, { exact: false })
+    const receivedIcons = screen.getAllByTestId(testIdMatch, {
+      exact: false,
+    })
 
     // Assert
     expect(receivedIcons).toHaveLength(icons.length)

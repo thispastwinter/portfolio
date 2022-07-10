@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js"
 import { SUPABASE_KEY, SUPABASE_URL } from "../constants/Environment"
 import { AnyObject } from "../types/AnyObject"
 import { Category } from "../types/Category"
+import { ContentBlock } from "../types/ContentBlock"
 import { Project } from "../types/Project"
 
 interface API {
@@ -55,13 +56,17 @@ const getProjects: API["getProjects"] = async () => {
 }
 
 const getProjectById: API["getProjectById"] = async (id) => {
-  const queryFields = getQueryFields<Project, Category>([
+  const queryFields = getQueryFields<Project, Category & ContentBlock>([
     "description",
     "id",
     "image",
     "name",
     "url",
     { table: "categories", fields: ["icon_name", "name"] },
+    {
+      table: "content_blocks",
+      fields: ["alt_text", "display_value", "value", "order", "type"],
+    },
   ])
   const query = supabase
     .from<Project>("projects")
