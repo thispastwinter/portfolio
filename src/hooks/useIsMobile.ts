@@ -8,6 +8,8 @@ export const useIsMobile = (mobileSize = 768) => {
   const handleWindowSizeChange = useCallback(() => {
     if (window.innerWidth <= mobileSize) {
       setIsMobile(true)
+    } else {
+      setIsMobile(false)
     }
   }, [mobileSize])
 
