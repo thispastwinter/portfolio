@@ -1,6 +1,6 @@
 import { ComponentProps } from "react"
 import { ContentBlock as ContentBlockType } from "../../types/ContentBlock"
-import { ContentBlock } from "../ContentBlock/ContentBlock"
+import { ContentBlock } from "../ContentBlock"
 
 interface ContentBlockProps {
   contentBlocks: ContentBlockType[]
