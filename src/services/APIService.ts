@@ -1,7 +1,6 @@
 import { createClient } from "@supabase/supabase-js"
 import { SUPABASE_KEY, SUPABASE_URL } from "../constants/Environment"
 import { AnyObject } from "../types/AnyObject"
-import { Category } from "../types/Category"
 import { ContentBlock } from "../types/ContentBlock"
 import { Project } from "../types/Project"
 
@@ -10,19 +9,40 @@ interface API {
   getProjectById: (id: Project["id"]) => Promise<Project | undefined>
 }
 
-type Fields<Data = AnyObject, Relationship = AnyObject> = Array<
-  keyof Data | { table: string; fields: Array<keyof Relationship> }
+type GetListItem<List extends Array<unknown>> = List[number]
+
+type ForeignTableObject<
+  Data extends AnyObject,
+  ForeignTable1,
+  ForeignTable2,
+  ForeignTable3,
+> = {
+  table: ForeignTable1 | ForeignTable2 | ForeignTable3
+  fields:
+    | Array<keyof GetListItem<Data[ForeignTable1]>>
+    | Array<keyof GetListItem<Data[ForeignTable2]>>
+    | Array<keyof GetListItem<Data[ForeignTable3]>>
+}
+
+type Fields<Data, ForeignTable1, ForeignTable2, ForeignTable3> = Array<
+  | keyof Data
+  | ForeignTableObject<Data, ForeignTable1, ForeignTable2, ForeignTable3>
 >
 
 // provides type inference when building query strings
-const getQueryFields = <Data, Relationship>(
-  fields?: Fields<Data, Relationship>,
+const getQueryFields = <
+  Data,
+  ForeignTable1 = keyof Data,
+  ForeignTable2 = keyof Data,
+  ForeignTable3 = keyof Data,
+>(
+  fields?: Fields<Data, ForeignTable1, ForeignTable2, ForeignTable3>,
 ) => {
   if (fields) {
     return fields
       .map((field) => {
         if (typeof field === "object") {
-          return `${field.table}(${field.fields.join(",")})`
+          return `${String(field.table)}(${field.fields.join(",")})`
         } else {
           return field
         }
@@ -37,7 +57,7 @@ const getQueryFields = <Data, Relationship>(
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
 const getProjects: API["getProjects"] = async () => {
-  const queryFields = getQueryFields<Project, Category>([
+  const queryFields = getQueryFields<Project, "categories">([
     "short_description",
     "id",
     "image",
@@ -56,7 +76,7 @@ const getProjects: API["getProjects"] = async () => {
 }
 
 const getProjectById: API["getProjectById"] = async (id) => {
-  const queryFields = getQueryFields<Project, Category & ContentBlock>([
+  const queryFields = getQueryFields<Project, "categories", "content_blocks">([
     "description",
     "id",
     "image",
@@ -68,11 +88,13 @@ const getProjectById: API["getProjectById"] = async (id) => {
       fields: ["alt_text", "display_value", "value", "order", "type"],
     },
   ])
+
   const query = supabase
-    .from<Project>("projects")
+    .from<Project & ContentBlock>("projects")
     .select(queryFields)
     .order("created_at", { ascending: false })
     .order("name", { foreignTable: "categories" })
+    .order("order", { foreignTable: "content_blocks" })
 
   const { data } = await query.eq("id", id).limit(1).single()
 
