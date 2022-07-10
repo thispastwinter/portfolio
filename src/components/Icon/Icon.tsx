@@ -34,5 +34,5 @@ interface IconProps extends IconBaseProps {
 
 export function Icon(props: IconProps) {
   const Icon = useCallback((props: IconProps) => getIcon(props)[props.name], [])
-  return <Icon aria-label={props.name} {...props} />
+  return <Icon data-testid={`icon_${props.name}`} {...props} />
 }
