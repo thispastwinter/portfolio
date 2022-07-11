@@ -34,8 +34,7 @@ const getProjectById: API["getProjectById"] = async (id) => {
   const queryFields = getQueryFieldString<
     Project,
     "categories",
-    "content_blocks",
-    "something"
+    "content_blocks"
   >([
     "description",
     "id",
