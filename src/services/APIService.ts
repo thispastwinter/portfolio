@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js"
 import { SUPABASE_KEY, SUPABASE_URL } from "../constants/Environment"
+import { Article } from "../types/Article"
 import { ContentBlock } from "../types/ContentBlock"
 import { Project } from "../types/Project"
 import { getQueryFieldString } from "../utils/getQueryFieldString"
@@ -7,6 +8,7 @@ import { getQueryFieldString } from "../utils/getQueryFieldString"
 interface API {
   getProjects: () => Promise<Project[] | undefined>
   getProjectById: (id: Project["id"]) => Promise<Project | undefined>
+  getArticleByName: (name: Article["name"]) => Promise<Article | undefined>
 }
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
@@ -60,7 +62,27 @@ const getProjectById: API["getProjectById"] = async (id) => {
   return data ?? undefined
 }
 
+const getArticleByName: API["getArticleByName"] = async (name) => {
+  const queryFields = getQueryFieldString<Article, "content_blocks">([
+    "id",
+    "name",
+    {
+      foreignTable: "content_blocks",
+      fields: ["alt_text", "display_value", "value", "order", "type"],
+    },
+  ])
+  const query = supabase
+    .from<Article & ContentBlock>("articles")
+    .select(queryFields)
+    .order("order", { foreignTable: "content_blocks" })
+
+  const { data } = await query.eq("name", name).limit(1).single()
+
+  return data ?? undefined
+}
+
 export const APIService: API = {
   getProjects,
   getProjectById,
+  getArticleByName,
 }
