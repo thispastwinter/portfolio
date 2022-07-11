@@ -3,5 +3,7 @@ import { ListItem } from "./ListItem"
 
 export type ForeignTableObject<Data extends AnyObject, ForeignTable> = {
   foreignTable: ForeignTable
-  fields: Array<keyof ListItem<Data[ForeignTable]>>
+  fields:
+    | Array<keyof ListItem<Data[ForeignTable]>>
+    | Array<keyof Data[ForeignTable]>
 }
