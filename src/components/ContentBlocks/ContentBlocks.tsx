@@ -11,12 +11,9 @@ export function ContentBlocks({
   contentBlocks,
   containerProps,
 }: ContentBlockProps) {
-  const sortByOrder = (a: ContentBlockType, b: ContentBlockType) =>
-    a.order - b.order
-
   return (
     <>
-      {contentBlocks.sort(sortByOrder).map((content) => (
+      {contentBlocks.map((content) => (
         <ContentBlock
           containerProps={containerProps}
           key={content.order}

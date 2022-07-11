@@ -10,5 +10,5 @@ export type Project = {
   url?: string
   image?: string
   categories: Category[]
-  content_blocks?: ContentBlock[]
+  content_blocks: ContentBlock[]
 }
