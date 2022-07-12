@@ -15,5 +15,9 @@ export function Article() {
     )
   }
 
-  return <ContentBlocks contentBlocks={data?.content_blocks || []} />
+  return (
+    <div className="flex flex-col gap-y-4 lg:max-w-[50%]">
+      <ContentBlocks contentBlocks={data?.content_blocks || []} />
+    </div>
+  )
 }

@@ -14,6 +14,7 @@ const ContentBlockMap: {
 } = {
   image: (props) => (
     <img
+      className="rounded-md"
       src={props.value}
       alt={props.alt_text}
       data-testid={props.data_testid}
