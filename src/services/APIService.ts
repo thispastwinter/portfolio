@@ -1,10 +1,10 @@
 import { createClient } from "@supabase/supabase-js"
 import { SUPABASE_KEY, SUPABASE_URL } from "../constants/Environment"
 import { Article } from "../types/Article"
-import { Row } from "../types/Row"
+import { ContentRow } from "../types/ContentRow"
 import { ContentBlock } from "../types/ContentBlock"
 import { Project } from "../types/Project"
-import { Column } from "../types/Column"
+import { ContentColumn } from "../types/ContentColumn"
 
 interface API {
   getProjects: () => Promise<Project[] | undefined>
@@ -28,14 +28,16 @@ const getProjects: API["getProjects"] = async () => {
 
 const getProjectById: API["getProjectById"] = async (id) => {
   const query = supabase
-    .from<Project & ContentBlock & Row & Column>("projects")
+    .from<Project & ContentBlock & ContentRow & ContentColumn>("projects")
     .select(
-      "description, id, image, name, url, categories(icon_name, name), columns(id, order, rows(id, order, content_blocks(alt_text, display_value, value, type, id)))",
+      "description, id, image, name, url, categories(icon_name, name), content_columns(id, order, content_rows(id, order, content_blocks(alt_text, display_value, value, type, id)))",
     )
     .order("name", { foreignTable: "categories" })
-    .order("order", { foreignTable: "columns" })
-    .order("order", { foreignTable: "columns.rows" })
-    .order("order", { foreignTable: "columns.rows.content_blocks" })
+    .order("order", { foreignTable: "content_columns" })
+    .order("order", { foreignTable: "content_columns.content_rows" })
+    .order("order", {
+      foreignTable: "content_columns.content_rows.content_blocks",
+    })
 
   const { data } = await query.eq("id", id).limit(1).single()
 
@@ -44,13 +46,15 @@ const getProjectById: API["getProjectById"] = async (id) => {
 
 const getArticleByName: API["getArticleByName"] = async (name) => {
   const query = supabase
-    .from<Article & ContentBlock & Row & Column>("articles")
+    .from<Article & ContentBlock & ContentRow & ContentColumn>("articles")
     .select(
-      "id, name, columns(id, order, rows(id, order, content_blocks(alt_text, display_value, value, type, id)))",
+      "id, name, content_columns(id, order, content_rows(id, order, content_blocks(alt_text, display_value, value, type, id)))",
     )
-    .order("order", { foreignTable: "columns" })
-    .order("order", { foreignTable: "columns.rows" })
-    .order("order", { foreignTable: "columns.rows.content_blocks" })
+    .order("order", { foreignTable: "content_columns" })
+    .order("order", { foreignTable: "content_columns.content_rows" })
+    .order("order", {
+      foreignTable: "content_columns.content_rows.content_blocks",
+    })
 
   const { data } = await query.eq("name", name).limit(1).single()
 

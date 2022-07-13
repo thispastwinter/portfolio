@@ -1,5 +1,5 @@
 import { Category } from "./Category"
-import { Column } from "./Column"
+import { ContentColumn } from "./ContentColumn"
 
 export type Project = {
   id: string
@@ -11,5 +11,5 @@ export type Project = {
   url?: string
   image?: string
   categories: Category[]
-  columns: Column[]
+  content_columns: ContentColumn[]
 }

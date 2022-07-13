@@ -30,5 +30,5 @@ export const project: Project = {
       name: "typescript",
     },
   ],
-  columns: [],
+  content_columns: [],
 }
