@@ -57,12 +57,20 @@ export function ProjectDetail() {
               </div>
             </div>
           </div>
-          <article className="md:pl-4">
+          <article className="flex flex-col md:pl-4">
             <div className="mb-12">
               <p className="text-8xl md:text-4xl font-display2">{data?.name}</p>
             </div>
-            <div className="flex flex-col gap-y-4">
-              <ContentBlocks contentBlocks={data?.content_blocks || []} />
+            <div className="flex flex-col">
+              {data?.columns.map(({ rows, id }) => (
+                <div key={id} className="flex flex-col gap-y-4">
+                  {rows.map(({ id, content_blocks }) => (
+                    <div key={id} className="flex flex-col lg:flex-row">
+                      <ContentBlocks contentBlocks={content_blocks || []} />
+                    </div>
+                  ))}
+                </div>
+              ))}
             </div>
           </article>
         </div>

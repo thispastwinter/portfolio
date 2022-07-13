@@ -1,8 +1,8 @@
-import { ContentBlock } from "./ContentBlock"
+import { Column } from "./Column"
 
 export type Article = {
   id: number
   created_at: string
   name: string
-  content_blocks: ContentBlock[]
+  columns: Column[]
 }

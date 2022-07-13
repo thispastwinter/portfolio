@@ -16,8 +16,18 @@ export function Article() {
   }
 
   return (
-    <div className="flex flex-col gap-y-4 lg:max-w-[50%]">
-      <ContentBlocks contentBlocks={data?.content_blocks || []} />
+    <div className="flex flex-col">
+      <div className="flex flex-col lg:flex-row gap-x-4">
+        {data?.columns.map(({ rows, id }) => (
+          <div key={id} className="flex flex-col gap-y-4">
+            {rows.map(({ id, content_blocks }) => (
+              <div key={id} className="flex flex-col lg:flex-row">
+                <ContentBlocks contentBlocks={content_blocks || []} />
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

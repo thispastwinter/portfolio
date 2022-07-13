@@ -1,9 +1,10 @@
 import { createClient } from "@supabase/supabase-js"
 import { SUPABASE_KEY, SUPABASE_URL } from "../constants/Environment"
 import { Article } from "../types/Article"
+import { Row } from "../types/Row"
 import { ContentBlock } from "../types/ContentBlock"
 import { Project } from "../types/Project"
-import { getQueryFieldString } from "../utils/getQueryFieldString"
+import { Column } from "../types/Column"
 
 interface API {
   getProjects: () => Promise<Project[] | undefined>
@@ -14,17 +15,10 @@ interface API {
 const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 
 const getProjects: API["getProjects"] = async () => {
-  const queryFields = getQueryFieldString<Project, "categories">([
-    "short_description",
-    "id",
-    "image",
-    "name",
-    { foreignTable: "categories", fields: ["icon_name", "name"] },
-  ])
   const query = supabase
     .from<Project>("projects")
-    .select(queryFields)
-    .order("created_at", { ascending: false })
+    .select("short_description, id, image, name, categories(icon_name, name)")
+    .order("start_date", { ascending: false })
     .order("name", { foreignTable: "categories" })
 
   const { data } = await query
@@ -33,29 +27,15 @@ const getProjects: API["getProjects"] = async () => {
 }
 
 const getProjectById: API["getProjectById"] = async (id) => {
-  const queryFields = getQueryFieldString<
-    Project,
-    "categories",
-    "content_blocks"
-  >([
-    "description",
-    "id",
-    "image",
-    "name",
-    "url",
-    { foreignTable: "categories", fields: ["icon_name", "name"] },
-    {
-      foreignTable: "content_blocks",
-      fields: ["alt_text", "display_value", "value", "order", "type"],
-    },
-  ])
-
   const query = supabase
-    .from<Project & ContentBlock>("projects")
-    .select(queryFields)
-    .order("created_at", { ascending: false })
+    .from<Project & ContentBlock & Row & Column>("projects")
+    .select(
+      "description, id, image, name, url, categories(icon_name, name), columns(id, order, rows(id, order, content_blocks(alt_text, display_value, value, type, id)))",
+    )
     .order("name", { foreignTable: "categories" })
-    .order("order", { foreignTable: "content_blocks" })
+    .order("order", { foreignTable: "columns" })
+    .order("order", { foreignTable: "columns.rows" })
+    .order("order", { foreignTable: "columns.rows.content_blocks" })
 
   const { data } = await query.eq("id", id).limit(1).single()
 
@@ -63,18 +43,14 @@ const getProjectById: API["getProjectById"] = async (id) => {
 }
 
 const getArticleByName: API["getArticleByName"] = async (name) => {
-  const queryFields = getQueryFieldString<Article, "content_blocks">([
-    "id",
-    "name",
-    {
-      foreignTable: "content_blocks",
-      fields: ["alt_text", "display_value", "value", "order", "type"],
-    },
-  ])
   const query = supabase
-    .from<Article & ContentBlock>("articles")
-    .select(queryFields)
-    .order("order", { foreignTable: "content_blocks" })
+    .from<Article & ContentBlock & Row & Column>("articles")
+    .select(
+      "id, name, columns(id, order, rows(id, order, content_blocks(alt_text, display_value, value, type, id)))",
+    )
+    .order("order", { foreignTable: "columns" })
+    .order("order", { foreignTable: "columns.rows" })
+    .order("order", { foreignTable: "columns.rows.content_blocks" })
 
   const { data } = await query.eq("name", name).limit(1).single()
 
