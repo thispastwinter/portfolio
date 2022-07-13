@@ -3,9 +3,13 @@ import { ContentBlocks } from "../../components/ContentBlocks"
 import { Spinner } from "../../components/Spinner"
 import { useGetArticleByName } from "../../hooks/useGetArticleByName"
 
-export function Article() {
+interface ArticleProps {
+  nameOverride?: string
+}
+
+export function Article({ nameOverride }: ArticleProps) {
   const { name } = useParams<{ name: string }>()
-  const { data, isLoading } = useGetArticleByName(name ?? "")
+  const { data, isLoading } = useGetArticleByName(name ?? nameOverride ?? "")
 
   if (isLoading) {
     return (
