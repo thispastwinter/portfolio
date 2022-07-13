@@ -7,7 +7,6 @@ describe("ContentBlock", () => {
     // Arrange
     const contentBlock: ContentBlockType = {
       alt_text: "",
-      created_at: "",
       display_value: "I am a paragraph",
       id: 1,
       order: 1,
@@ -26,7 +25,6 @@ describe("ContentBlock", () => {
     // Arrange
     const contentBlock: ContentBlockType = {
       alt_text: "",
-      created_at: "",
       display_value: "I am a title",
       id: 2,
       order: 2,
@@ -45,7 +43,6 @@ describe("ContentBlock", () => {
     // Arrange
     const contentBlock: ContentBlockType = {
       alt_text: "",
-      created_at: "",
       display_value: "I am a subtitle",
       id: 3,
       order: 3,
@@ -64,7 +61,6 @@ describe("ContentBlock", () => {
     // Arrange
     const contentBlock: ContentBlockType = {
       alt_text: "",
-      created_at: "",
       display_value: "Website",
       id: 4,
       order: 4,
@@ -83,7 +79,6 @@ describe("ContentBlock", () => {
     // Arrange
     const contentBlock: ContentBlockType = {
       alt_text: "I am a image",
-      created_at: "",
       display_value: "",
       id: 5,
       order: 5,

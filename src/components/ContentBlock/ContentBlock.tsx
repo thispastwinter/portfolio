@@ -1,9 +1,15 @@
+import classNames from "classnames"
 import { ComponentProps } from "react"
 import { ContentBlock as ContentBlockType } from "../../types/ContentBlock"
 import { Icon } from "../Icon"
 
 export interface ContentBlockProps
   extends Omit<ContentBlockType, "order" | "created_at" | "id"> {
+  imageProps?: ComponentProps<"img">
+  paragraphProps?: ComponentProps<"p">
+  subtitleProps?: ComponentProps<"p">
+  titleProps?: ComponentProps<"p">
+  urlProps?: ComponentProps<"a">
   containerProps?: ComponentProps<"div">
 }
 
@@ -14,28 +20,47 @@ const ContentBlockMap: {
 } = {
   image: (props) => (
     <img
+      {...props.imageProps}
+      className={classNames("rounded-md", props.imageProps?.className)}
       src={props.value}
       alt={props.alt_text}
       data-testid={props.data_testid}
     />
   ),
   paragraph: (props) => (
-    <p data-testid={props.data_testid}>{props.display_value}</p>
+    <p {...props.paragraphProps} data-testid={props.data_testid}>
+      {props.display_value.split("\n")}
+    </p>
   ),
   sub_title: (props) => (
-    <p data-testid={props.data_testid} className="text-lg">
+    <p
+      {...props.subtitleProps}
+      data-testid={props.data_testid}
+      className={classNames("text-lg", props.subtitleProps?.className)}
+    >
       {props.display_value}
     </p>
   ),
   title: (props) => (
-    <p data-testid={props.data_testid} className="text-2xl font-medium">
+    <p
+      {...props.titleProps}
+      data-testid={props.data_testid}
+      className={classNames(
+        "text-2xl font-medium",
+        props.titleProps?.className,
+      )}
+    >
       {props.display_value}
     </p>
   ),
   url: (props) => (
     <a
+      {...props.urlProps}
       data-testid={props.data_testid}
-      className="flex items-center font-bold"
+      className={classNames(
+        "flex items-center font-bold",
+        props.urlProps?.className,
+      )}
       target="_blank"
       href={props.value}
       rel="noreferrer"
