@@ -61,7 +61,7 @@ export function ProjectDetail() {
             <div className="mb-12">
               <p className="text-8xl md:text-4xl font-display2">{data?.name}</p>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col lg:flex-row gap-4">
               {data?.columns.map(({ rows, id }) => (
                 <div key={id} className="flex flex-col gap-y-4">
                   {rows.map(({ id, content_blocks }) => (
