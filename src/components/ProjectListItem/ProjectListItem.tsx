@@ -11,11 +11,11 @@ export function ProjectListItem({ project, className }: ProjectListItemProps) {
   return (
     <Card className={className}>
       <p className="text-2xl font-medium mb-6">{project.name}</p>
-      <div className="flex flex-wrap md:flex-nowrap">
+      <div className="flex flex-wrap md:flex-nowrap justify-center">
         <img
           alt={project.name}
           src={project.image}
-          className="rounded-lg md:w-1/4 h-1/4 mr-4 border"
+          className="rounded-lg md:w-1/4 h-1/4 md:mr-4 border"
         />
         <div className="flex flex-col mt-4 md:mt-0">
           <p>{project.short_description}</p>
