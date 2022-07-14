@@ -7,7 +7,7 @@ export function Main() {
       <div className="md:hidden">
         <div className="flex flex-col gap-y-4 my-10">
           <p className="text-2xl font-medium mb-2">A little about me...</p>
-          <Article nameOverride="about" />
+          <Article articleName="about" />
         </div>
       </div>
       <Projects />

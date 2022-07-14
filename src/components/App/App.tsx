@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "react-query"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import { MainLayout } from "../../layouts/MainLayout"
 import { Article } from "../../pages/Article"
 import { Main } from "../../pages/Main"
@@ -13,7 +13,8 @@ export function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainLayout />}>
-            <Route index element={<Main />} />
+            <Route index element={<Navigate to="projects" replace />} />
+            <Route path="/projects" element={<Main />} />
             <Route path="/:name" element={<Article />} />
             <Route path="/projects/:id" element={<ProjectDetail />} />
           </Route>

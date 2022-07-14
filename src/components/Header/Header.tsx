@@ -24,7 +24,7 @@ export function Header({ isHidden = false }: HeaderProps) {
       </div>
       <nav className="invisible h-0 md:visible md:h-auto">
         <div className="flex gap-10">
-          <NavLink to="/">Recent Work</NavLink>
+          <NavLink to="projects">Recent Work</NavLink>
           <NavLink to="about">About</NavLink>
           <NavLink to={URL.github}>Github</NavLink>
           <NavLink to={URL.linkedIn}>LinkedIn</NavLink>
