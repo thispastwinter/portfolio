@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import { ProjectListItem } from "../../components/ProjectListItem"
 import { Spinner } from "../../components/Spinner"
+import { Routes } from "../../constants/Routes"
 import { useGetProjects } from "../../hooks/useGetProjects"
 
 export function Projects() {
@@ -8,7 +9,7 @@ export function Projects() {
   const navigate = useNavigate()
 
   const goToProject = (id: string) => {
-    navigate(`../projects/${id}`)
+    navigate(Routes.projectsDetail(id))
   }
 
   if (isLoading) {

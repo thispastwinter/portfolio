@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { ContentContainer } from "../../components/ContentContainer"
 import { Icon } from "../../components/Icon"
 import { Spinner } from "../../components/Spinner"
@@ -7,11 +7,6 @@ import { useGetProjectById } from "../../hooks/useGetProjectById"
 export function ProjectDetail() {
   const { id } = useParams<{ id: string }>()
   const { data, isLoading } = useGetProjectById(id ?? "")
-  const navigate = useNavigate()
-
-  const goBack = () => {
-    navigate("../")
-  }
 
   if (isLoading) {
     return (
@@ -23,13 +18,9 @@ export function ProjectDetail() {
 
   return (
     <div className="flex flex-col">
-      <button className="flex pb-4 items-center md:hidden" onClick={goBack}>
-        <Icon name="chevronLeft" size={32} />
-        <p className="text-xl">Projects</p>
-      </button>
       <div className="flex flex-wrap md:flex-nowrap">
         <div className="flex flex-wrap md:flex-nowrap">
-          <div className="flex flex-col md:pr-4 max-w-lg w-full md:border-r">
+          <div className="flex flex-col md:pr-4 max-w-lg w-full mr-20">
             <img
               className="border rounded-lg"
               alt={data?.name}

@@ -5,6 +5,8 @@ import { ContentRow } from "../types/ContentRow"
 import { ContentBlock } from "../types/ContentBlock"
 import { Project } from "../types/Project"
 import { ContentColumn } from "../types/ContentColumn"
+import { Routes } from "../constants/Routes"
+import { ErrorService } from "./ErrorService"
 
 interface API {
   getProjects: () => Promise<Project[] | undefined>
@@ -21,7 +23,15 @@ const getProjects: API["getProjects"] = async () => {
     .order("start_date", { ascending: false })
     .order("name", { foreignTable: "categories" })
 
-  const { data } = await query
+  const { data, error, status } = await query
+
+  if (error) {
+    throw ErrorService.createError({
+      dataType: "projects",
+      status,
+      metaData: { route: Routes.projects },
+    })
+  }
 
   return data ?? undefined
 }
@@ -39,7 +49,15 @@ const getProjectById: API["getProjectById"] = async (id) => {
       foreignTable: "content_columns.content_rows.content_blocks",
     })
 
-  const { data } = await query.eq("id", id).limit(1).single()
+  const { data, error, status } = await query.eq("id", id).limit(1).single()
+
+  if (error) {
+    throw ErrorService.createError({
+      dataType: "project",
+      status,
+      metaData: { route: Routes.projectsDetail(id) },
+    })
+  }
 
   return data ?? undefined
 }
@@ -56,7 +74,17 @@ const getArticleByName: API["getArticleByName"] = async (name) => {
       foreignTable: "content_columns.content_rows.content_blocks",
     })
 
-  const { data } = await query.eq("name", name).limit(1).single()
+  const { data, error, status } = await query.eq("name", name).limit(1).single()
+
+  if (error) {
+    throw ErrorService.createError({
+      dataType: "article",
+      status,
+      metaData: {
+        route: Routes.articleDetail(name),
+      },
+    })
+  }
 
   return data ?? undefined
 }
