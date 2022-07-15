@@ -6,6 +6,7 @@ export function useGetArticleByName(name: string) {
   const { data, isLoading, error } = useQuery(
     ArticleQueryKeys.byName(name),
     () => APIService.getArticleByName(name),
+    { useErrorBoundary: true },
   )
   return { data, isLoading, error }
 }
