@@ -4,12 +4,14 @@ export const contentColumns: ContentColumn[] = [
   {
     id: 3,
     order: 1,
+    className: "",
     content_rows: [
       {
         id: 12,
         order: 1,
         content_blocks: [
           {
+            className: "",
             order: 1,
             alt_text: "A picture",
             display_value: "",
@@ -24,12 +26,14 @@ export const contentColumns: ContentColumn[] = [
   {
     id: 4,
     order: 2,
+    className: "",
     content_rows: [
       {
         id: 13,
         order: 1,
         content_blocks: [
           {
+            className: "",
             order: 1,
             alt_text: "",
             display_value:
@@ -45,6 +49,7 @@ export const contentColumns: ContentColumn[] = [
         order: 3,
         content_blocks: [
           {
+            className: "",
             order: 1,
             alt_text: "",
             display_value:
@@ -60,6 +65,7 @@ export const contentColumns: ContentColumn[] = [
         order: 2,
         content_blocks: [
           {
+            className: "",
             order: 1,
             alt_text: "",
             display_value: "Website",

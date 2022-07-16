@@ -20,7 +20,7 @@ export function ProjectDetail() {
     <div className="flex flex-col">
       <div className="flex flex-wrap md:flex-nowrap">
         <div className="flex flex-wrap md:flex-nowrap">
-          <div className="flex flex-col md:pr-4 max-w-lg w-full mr-20">
+          <div className="flex flex-col md:pr-4 max-w-lg w-full md:mr-20">
             <img
               className="border rounded-lg"
               alt={data?.name}
@@ -50,7 +50,7 @@ export function ProjectDetail() {
           </div>
           <article className="flex flex-col md:pl-4">
             <div className="mb-12">
-              <p className="text-8xl md:text-4xl font-display2">{data?.name}</p>
+              <p className="text-4xl font-bold mt-4 md:mt-0">{data?.name}</p>
             </div>
             <div className="flex flex-col lg:flex-row gap-4">
               <ContentContainer columns={data?.content_columns || []} />

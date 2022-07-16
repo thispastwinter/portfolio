@@ -7,4 +7,5 @@ export type ContentBlock = {
   type: ContentBlockType
   value: string
   display_value: string
+  className: string
 }

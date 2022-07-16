@@ -1,17 +1,11 @@
 import classNames from "classnames"
-import { ComponentProps } from "react"
 import { ContentBlock as ContentBlockType } from "../../types/ContentBlock"
 import { Icon } from "../Icon"
 
-export interface ContentBlockProps
-  extends Omit<ContentBlockType, "order" | "created_at" | "id"> {
-  imageProps?: ComponentProps<"img">
-  paragraphProps?: ComponentProps<"p">
-  subtitleProps?: ComponentProps<"p">
-  titleProps?: ComponentProps<"p">
-  urlProps?: ComponentProps<"a">
-  containerProps?: ComponentProps<"div">
-}
+export type ContentBlockProps = Omit<
+  ContentBlockType,
+  "order" | "created_at" | "id"
+>
 
 const ContentBlockMap: {
   [key in ContentBlockType["type"]]: (
@@ -20,46 +14,39 @@ const ContentBlockMap: {
 } = {
   image: (props) => (
     <img
-      {...props.imageProps}
-      className={classNames("rounded-md", props.imageProps?.className)}
+      className={classNames("rounded-md", props.className)}
       src={props.value}
       alt={props.alt_text}
       data-testid={props.data_testid}
     />
   ),
   paragraph: (props) => (
-    <p {...props.paragraphProps} data-testid={props.data_testid}>
+    <p className={classNames(props.className)} data-testid={props.data_testid}>
       {props.display_value.split("\n")}
     </p>
   ),
   sub_title: (props) => (
     <p
-      {...props.subtitleProps}
       data-testid={props.data_testid}
-      className={classNames("text-lg", props.subtitleProps?.className)}
+      className={classNames("text-lg", props.className)}
     >
       {props.display_value}
     </p>
   ),
   title: (props) => (
     <p
-      {...props.titleProps}
       data-testid={props.data_testid}
-      className={classNames(
-        "text-2xl font-medium",
-        props.titleProps?.className,
-      )}
+      className={classNames("text-2xl font-medium", props.className)}
     >
       {props.display_value}
     </p>
   ),
   url: (props) => (
     <a
-      {...props.urlProps}
       data-testid={props.data_testid}
       className={classNames(
-        "flex items-center font-bold",
-        props.urlProps?.className,
+        "flex items-center font-bold hover:opacity-60",
+        props.className,
       )}
       target="_blank"
       href={props.value}
@@ -75,7 +62,7 @@ export function ContentBlock({ type, ...rest }: ContentBlockProps) {
   const Content = ContentBlockMap[type]
 
   return (
-    <div {...rest.containerProps}>
+    <div>
       <Content {...rest} data_testid="content_block" />
     </div>
   )

@@ -3,12 +3,14 @@ import { ContentColumn } from "../../../types/ContentColumn"
 export const contentColumn: ContentColumn = {
   id: 1,
   order: 1,
+  className: "",
   content_rows: [
     {
       id: 8,
       order: 1,
       content_blocks: [
         {
+          className: "",
           order: 1,
           alt_text: "",
           display_value: "The Problem",
@@ -23,6 +25,7 @@ export const contentColumn: ContentColumn = {
       order: 2,
       content_blocks: [
         {
+          className: "",
           order: 1,
           alt_text: "",
           display_value:
@@ -38,6 +41,7 @@ export const contentColumn: ContentColumn = {
       order: 3,
       content_blocks: [
         {
+          className: "",
           order: 1,
           alt_text: "",
           display_value: "The Solution",
@@ -52,6 +56,7 @@ export const contentColumn: ContentColumn = {
       order: 4,
       content_blocks: [
         {
+          className: "",
           order: 1,
           alt_text: "",
           display_value:

@@ -1,15 +1,9 @@
-import { Article } from "../Article"
 import { Projects } from "../Projects"
 
 export function Main() {
   return (
     <>
-      <div className="md:hidden">
-        <div className="flex flex-col gap-y-4 my-10">
-          <p className="text-2xl font-medium mb-2">A little about me...</p>
-          <Article articleName="about" />
-        </div>
-      </div>
+      <p className="mb-10 text-2xl font-medium">Recent Work</p>
       <Projects />
     </>
   )

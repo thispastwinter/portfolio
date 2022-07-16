@@ -21,7 +21,7 @@ export function Article({ articleName }: ArticleProps) {
 
   return (
     <article className="flex flex-col">
-      <div className="flex flex-col lg:flex-row gap-4">
+      <div className="flex flex-col lg:flex-row">
         <ContentContainer columns={data?.content_columns || []} />
       </div>
     </article>

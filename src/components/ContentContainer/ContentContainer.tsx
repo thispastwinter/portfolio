@@ -8,8 +8,12 @@ interface ContnetContainerProps {
 export function ContentContainer({ columns }: ContnetContainerProps) {
   return (
     <div className="flex flex-col lg:flex-row gap-4">
-      {columns.map(({ content_rows, id }) => (
-        <ContentColumn key={id} content_rows={content_rows} />
+      {columns.map(({ content_rows, id, className }) => (
+        <ContentColumn
+          key={id}
+          content_rows={content_rows}
+          className={className}
+        />
       ))}
     </div>
   )

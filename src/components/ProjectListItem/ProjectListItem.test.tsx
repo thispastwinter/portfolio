@@ -20,11 +20,11 @@ describe("ProjectListItem", () => {
   it("renders categories", () => {
     // Arrange
     const categories = project.categories
-    const iconTestIDMatch = /icon/
+    const categoryTestIDMatch = /category/
 
     // Act
     render(<ProjectListItem project={project} />)
-    const receivedIcons = screen.getAllByTestId(iconTestIDMatch, {
+    const receivedIcons = screen.getAllByTestId(categoryTestIDMatch, {
       exact: false,
     })
 

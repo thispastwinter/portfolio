@@ -1,6 +1,7 @@
 import { useCallback } from "react"
 import { IconBaseProps } from "react-icons"
 import {
+  FiArrowRight,
   FiArrowUpRight,
   FiChevronLeft,
   FiGlobe,
@@ -9,6 +10,7 @@ import {
 import {
   SiGithub,
   SiGraphql,
+  SiLinkedin,
   SiMapbox,
   SiReact,
   SiTypescript,
@@ -21,9 +23,11 @@ export const getIcon = (props: IconBaseProps) => ({
   mapbox: <SiMapbox {...props} />,
   chevronLeft: <FiChevronLeft {...props} />,
   arrowUpRight: <FiArrowUpRight {...props} />,
+  arrowRight: <FiArrowRight {...props} />,
   graphql: <SiGraphql {...props} />,
   react: <SiReact {...props} />,
   github: <SiGithub {...props} />,
+  linkedin: <SiLinkedin {...props} />,
 })
 
 export type IconName = keyof ReturnType<typeof getIcon>
