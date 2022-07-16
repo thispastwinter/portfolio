@@ -12,6 +12,7 @@ describe("ContentBlock", () => {
       order: 1,
       type: "paragraph",
       value: "",
+      className: "",
     }
 
     // Act
@@ -30,6 +31,7 @@ describe("ContentBlock", () => {
       order: 2,
       type: "title",
       value: "",
+      className: "",
     }
 
     // Act
@@ -48,6 +50,7 @@ describe("ContentBlock", () => {
       order: 3,
       type: "sub_title",
       value: "",
+      className: "",
     }
 
     // Act
@@ -66,6 +69,7 @@ describe("ContentBlock", () => {
       order: 4,
       type: "url",
       value: "https://www.google.com",
+      className: "",
     }
 
     // Act
@@ -84,6 +88,7 @@ describe("ContentBlock", () => {
       order: 5,
       type: "image",
       value: require("../../assets/images/placeholder.png"),
+      className: "",
     }
 
     // Act

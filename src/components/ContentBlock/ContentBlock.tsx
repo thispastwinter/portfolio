@@ -20,15 +20,22 @@ const ContentBlockMap: {
 } = {
   image: (props) => (
     <img
-      {...props.imageProps}
-      className={classNames("rounded-md", props.imageProps?.className)}
+      className={classNames(
+        "rounded-md",
+        props.imageProps?.className,
+        props.className,
+      )}
       src={props.value}
       alt={props.alt_text}
       data-testid={props.data_testid}
     />
   ),
   paragraph: (props) => (
-    <p {...props.paragraphProps} data-testid={props.data_testid}>
+    <p
+      {...props.paragraphProps}
+      className={classNames(props.paragraphProps?.className, props.className)}
+      data-testid={props.data_testid}
+    >
       {props.display_value.split("\n")}
     </p>
   ),
@@ -36,7 +43,11 @@ const ContentBlockMap: {
     <p
       {...props.subtitleProps}
       data-testid={props.data_testid}
-      className={classNames("text-lg", props.subtitleProps?.className)}
+      className={classNames(
+        "text-lg",
+        props.subtitleProps?.className,
+        props.className,
+      )}
     >
       {props.display_value}
     </p>
@@ -48,6 +59,7 @@ const ContentBlockMap: {
       className={classNames(
         "text-2xl font-medium",
         props.titleProps?.className,
+        props.className,
       )}
     >
       {props.display_value}
@@ -60,6 +72,7 @@ const ContentBlockMap: {
       className={classNames(
         "flex items-center font-bold",
         props.urlProps?.className,
+        props.className,
       )}
       target="_blank"
       href={props.value}

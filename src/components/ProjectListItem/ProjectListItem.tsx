@@ -1,6 +1,8 @@
+import classNames from "classnames"
 import { Project } from "../../types/Project"
 import { Card } from "../Card"
 import { Icon } from "../Icon"
+import "./index.css"
 
 interface ProjectListItemProps {
   className?: string
@@ -9,7 +11,7 @@ interface ProjectListItemProps {
 
 export function ProjectListItem({ project, className }: ProjectListItemProps) {
   return (
-    <Card className={className}>
+    <Card className={classNames("project-list-item", className)}>
       <p className="text-2xl font-medium mb-6">{project.name}</p>
       <div className="flex flex-wrap md:flex-nowrap justify-center">
         <img
@@ -19,10 +21,9 @@ export function ProjectListItem({ project, className }: ProjectListItemProps) {
         />
         <div className="flex flex-col mt-4 md:mt-0">
           <p>{project.short_description}</p>
-          {project.categories.length ? (
-            <div>
-              <p className="my-2 font-medium">Stack:</p>
-              <div className="flex gap-2">
+          <div className="flex items-end justify-between mt-auto mb-2">
+            {project.categories.length ? (
+              <div className="flex gap-x-2">
                 {project.categories.map(({ icon_name, name }) => (
                   <Icon
                     title={name}
@@ -32,8 +33,11 @@ export function ProjectListItem({ project, className }: ProjectListItemProps) {
                   />
                 ))}
               </div>
+            ) : null}
+            <div className="project-list-item-arrow">
+              <Icon name="arrowRight" size={24} />
             </div>
-          ) : null}
+          </div>
         </div>
       </div>
     </Card>

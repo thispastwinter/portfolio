@@ -18,6 +18,7 @@ export function ContentBlocks({ contentBlocks, ...rest }: ContentBlockProps) {
       {contentBlocks.map((content) => (
         <ContentBlock
           {...rest}
+          className={content.className}
           key={content.id}
           alt_text={content.alt_text}
           display_value={content.display_value}

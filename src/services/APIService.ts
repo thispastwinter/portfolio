@@ -66,7 +66,7 @@ const getArticleByName: API["getArticleByName"] = async (name) => {
   const query = supabase
     .from<Article & ContentBlock & ContentRow & ContentColumn>("articles")
     .select(
-      "id, name, content_columns(id, order, content_rows(id, order, content_blocks(alt_text, display_value, value, type, id)))",
+      "id, name, content_columns(id, order, className, content_rows(id, order, content_blocks(alt_text, display_value, value, type, id, className)))",
     )
     .order("order", { foreignTable: "content_columns" })
     .order("order", { foreignTable: "content_columns.content_rows" })
