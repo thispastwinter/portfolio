@@ -8,7 +8,7 @@ export function Projects() {
   const { data, isLoading } = useGetProjects()
   const navigate = useNavigate()
 
-  const goToProject = (id: string) => {
+  const goToProject = (id: number) => {
     navigate(Routes.projectsDetail(id))
   }
 
