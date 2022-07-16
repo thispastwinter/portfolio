@@ -8,12 +8,19 @@ interface HeaderProps {
 
 export function Header({ isHidden = false }: HeaderProps) {
   const navigate = useNavigate()
+  const goBackToHome = () => {
+    navigate("/")
+  }
 
   return !isHidden ? (
     <div className="mb-16">
       <div className="mb-4">
         <div className="flex">
-          <Logo />
+          <Logo
+            className="cursor-pointer"
+            onClick={goBackToHome}
+            aria-label="Return to home"
+          />
         </div>
         <p className="text-2xl font-light text-secondary mt-4">
           application developer specializing in React-Native, GraphQL, and

@@ -4,20 +4,17 @@ import { Header } from "./Header"
 describe("Header", () => {
   it("renders", () => {
     // Arrange
-    const title1 = "justin"
-    const title2 = "klaas"
+    const headerImageLabel = "Return to home"
     const subTitle =
       "application developer specializing in React-Native, GraphQL, and Typescript."
 
     // Act
     render(<Header />)
-    const receivedTitle1 = screen.getByText(title1)
-    const receivedTitle2 = screen.getByText(title2)
+    const receivedHeaderImage = screen.getByLabelText(headerImageLabel)
     const receivedSubTitle = screen.getByText(subTitle)
 
     // Assert
-    expect(receivedTitle1).toBeInTheDocument()
-    expect(receivedTitle2).toBeInTheDocument()
+    expect(receivedHeaderImage).toBeInTheDocument()
     expect(receivedSubTitle).toBeInTheDocument()
   })
   it("is hidden when isHidden is 'true'", () => {

@@ -4,6 +4,7 @@ import { Footer } from "../components/Footer"
 import { Header } from "../components/Header"
 import { useIsMobile } from "../hooks/useIsMobile"
 import { useScrollToTop } from "../hooks/useScrollToTop"
+import { Article } from "../pages/Article"
 
 export function MainLayout() {
   const match = useMatch("/projects/:id")
@@ -16,7 +17,9 @@ export function MainLayout() {
     <div className="flex flex-col m-4 md:m-6">
       <Header isHidden={isHidden} />
       <Outlet />
-      <Footer />
+      <Footer>
+        <Article articleName="about" />
+      </Footer>
     </div>
   )
 }

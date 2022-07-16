@@ -26,6 +26,7 @@ export function ProjectListItem({ project, className }: ProjectListItemProps) {
               <div className="flex gap-x-2">
                 {project.categories.map(({ icon_name, name }) => (
                   <Icon
+                    data-testid={`category_${name}`}
                     title={name}
                     size={20}
                     key={icon_name}
