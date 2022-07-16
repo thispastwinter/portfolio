@@ -15,10 +15,20 @@ export function Footer({ children }: FooterProps) {
       <div className="flex items-center justify-between border-b-2 pb-10 mb-10">
         <p className="text-2xl font-medium">Get to know me</p>
         <div className="flex gap-x-4">
-          <a target="_blank" href={URL.github} rel="noreferrer">
+          <a
+            className="hover:opacity-60"
+            target="_blank"
+            href={URL.github}
+            rel="noreferrer"
+          >
             <Icon name="github" size={ICON_SIZE} />
           </a>
-          <a target="_blank" href={URL.linkedIn} rel="noreferrer">
+          <a
+            className="hover:opacity-60"
+            target="_blank"
+            href={URL.linkedIn}
+            rel="noreferrer"
+          >
             <Icon name="linkedin" size={ICON_SIZE} />
           </a>
         </div>
