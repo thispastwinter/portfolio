@@ -1,4 +1,4 @@
-import decoratorCentered from "@storybook/addon-centered"
+import { ComponentStory } from "@storybook/react"
 import { Footer } from "./Footer"
 
 /**
@@ -7,8 +7,13 @@ import { Footer } from "./Footer"
  */
 
 export default {
-  title: "Footer",
-  decorators: [decoratorCentered],
+  title: "Components/Footer",
 }
 
-export const Example = () => <Footer />
+const Template: ComponentStory<typeof Footer> = (args) => <Footer {...args} />
+
+export const Example = Template.bind({})
+
+Example.args = {
+  children: <p>Hello World, this is my footer.</p>,
+}

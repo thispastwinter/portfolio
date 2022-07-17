@@ -1,20 +1,31 @@
 import { useNavigate, useParams } from "react-router-dom"
+import { useMemo } from "react"
 import { ContentContainer } from "../../components/ContentContainer"
 import { Icon } from "../../components/Icon"
 import { Spinner } from "../../components/Spinner"
 import { Routes } from "../../constants/Routes"
 import { useGetProjectById } from "../../hooks/useGetProjectById"
 import { useGetProjects } from "../../hooks/useGetProjects"
-import { Project } from "../../types/Project"
 import { ErrorService } from "../../services/ErrorService"
-
-const toDate = (timestamp: string) => new Date(timestamp)
+import { PageButton } from "./PageButton"
 
 export function ProjectDetail() {
   const { id } = useParams<{ id: string }>()
   const { data: currentProject, isLoading } = useGetProjectById(id ?? "")
   const { data: projects } = useGetProjects()
   const navigate = useNavigate()
+
+  const currentIndex = useMemo(
+    () =>
+      Number(
+        projects?.findIndex((project) => project.id === currentProject?.id),
+      ),
+    [currentProject, projects],
+  )
+
+  const previousProject = projects?.[currentIndex - 1]
+
+  const nextProject = projects?.[currentIndex + 1]
 
   if (isLoading) {
     return (
@@ -30,10 +41,6 @@ export function ProjectDetail() {
 
   const onProjectClick = (id: number) => {
     navigate(Routes.projectsDetail(id))
-  }
-
-  const getOtherProjects = (project: Project) => {
-    return toDate(currentProject.start_date) < toDate(project.start_date)
   }
 
   return (
@@ -86,22 +93,21 @@ export function ProjectDetail() {
           </article>
         </div>
       </div>
-      <div className="ml-auto flex items-center gap-x-4 mt-10">
-        {projects?.filter(getOtherProjects).map((project) => (
-          <div key={project.id} className="max-w-xs min-h-[150px] my-4">
-            <div>
-              <p className="font-medium mb-2">{project.name}</p>
-              <p className="text-xs">{project.short_description}</p>
-              <button
-                onClick={() => onProjectClick(project.id)}
-                className="flex items-center mt-4 border p-4 border-gray-400"
-              >
-                <p>Next project</p>
-                <Icon className="ml-2" name="arrowRight" />
-              </button>
-            </div>
-          </div>
-        ))}
+      <div className="flex items-center gap-x-4 ml-auto mt-10">
+        {previousProject && (
+          <PageButton
+            onProjectClick={onProjectClick}
+            project={previousProject}
+            variant="Previous"
+          />
+        )}
+        {nextProject && (
+          <PageButton
+            onProjectClick={onProjectClick}
+            project={nextProject}
+            variant="Next"
+          />
+        )}
       </div>
     </div>
   )
