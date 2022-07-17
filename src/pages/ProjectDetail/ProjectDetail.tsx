@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { useMemo } from "react"
+import { format } from "date-fns"
 import { ContentContainer } from "../../components/ContentContainer"
 import { Icon } from "../../components/Icon"
 import { Spinner } from "../../components/Spinner"
@@ -7,7 +8,13 @@ import { Routes } from "../../constants/Routes"
 import { useGetProjectById } from "../../hooks/useGetProjectById"
 import { useGetProjects } from "../../hooks/useGetProjects"
 import { ErrorService } from "../../services/ErrorService"
+import { Button } from "../../components/Button"
 import { PageButton } from "./PageButton"
+
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString)
+  return format(date, "MMM yyyy")
+}
 
 export function ProjectDetail() {
   const { id } = useParams<{ id: string }>()
@@ -80,7 +87,12 @@ export function ProjectDetail() {
               <p className="text-4xl font-bold mt-4 md:mt-0 mb-2">
                 {currentProject.name}
               </p>
-              <p>{currentProject.role}</p>
+              <p className="font-medium">{currentProject.role}</p>
+              <div className="flex items-center gap-x-2 mt-2">
+                <p>{formatDate(currentProject.start_date)}</p>
+                <p>-</p>
+                <p>{formatDate(currentProject.end_date)}</p>
+              </div>
             </div>
             <div className="mb-12">
               <p>{currentProject.description}</p>
@@ -93,12 +105,18 @@ export function ProjectDetail() {
           </article>
         </div>
       </div>
-      <div className="flex items-center gap-x-4 ml-auto mt-10">
-        {previousProject && (
+      <div className="flex items-center gap-x-4 justify-between md:justify-end mt-10">
+        {previousProject ? (
           <PageButton
             onProjectClick={onProjectClick}
             project={previousProject}
             variant="previous"
+          />
+        ) : (
+          <Button
+            text="Home"
+            onClick={() => navigate(Routes.projects)}
+            leftAdornment={<Icon className="mr-2" name="arrowLeft" />}
           />
         )}
         {nextProject && (
