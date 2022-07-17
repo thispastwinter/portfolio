@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { useMemo } from "react"
-import { format } from "date-fns"
+import { differenceInMonths, format } from "date-fns"
 import { ContentContainer } from "../../components/ContentContainer"
 import { Icon } from "../../components/Icon"
 import { Spinner } from "../../components/Spinner"
@@ -11,8 +11,10 @@ import { ErrorService } from "../../services/ErrorService"
 import { Button } from "../../components/Button"
 import { PageButton } from "./PageButton"
 
+const toDate = (dateString: string) => new Date(dateString)
+
 const formatDate = (dateString: string) => {
-  const date = new Date(dateString)
+  const date = toDate(dateString)
   return format(date, "MMM yyyy")
 }
 
@@ -21,6 +23,11 @@ export function ProjectDetail() {
   const { data: currentProject, isLoading } = useGetProjectById(id ?? "")
   const { data: projects } = useGetProjects()
   const navigate = useNavigate()
+
+  const startDate = toDate(currentProject?.start_date || "")
+  const endDate = toDate(currentProject?.end_date || "")
+
+  const numberOfMonths = differenceInMonths(endDate, startDate)
 
   const currentIndex = useMemo(
     () =>
@@ -92,6 +99,8 @@ export function ProjectDetail() {
                 <p>{formatDate(currentProject.start_date)}</p>
                 <p>-</p>
                 <p>{formatDate(currentProject.end_date)}</p>
+                <p>|</p>
+                <p>{numberOfMonths} months</p>
               </div>
             </div>
             <div className="mb-12">
