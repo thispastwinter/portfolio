@@ -98,14 +98,14 @@ export function ProjectDetail() {
           <PageButton
             onProjectClick={onProjectClick}
             project={previousProject}
-            variant="Previous"
+            variant="previous"
           />
         )}
         {nextProject && (
           <PageButton
             onProjectClick={onProjectClick}
             project={nextProject}
-            variant="Next"
+            variant="next"
           />
         )}
       </div>
