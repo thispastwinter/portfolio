@@ -7,18 +7,23 @@ export interface ButtonProps extends ComponentProps<"button"> {
   rightAdornment?: ReactNode
 }
 
-export function Button(props: ButtonProps) {
+export function Button({
+  text,
+  leftAdornment,
+  rightAdornment,
+  ...rest
+}: ButtonProps) {
   return (
     <button
-      {...props}
+      {...rest}
       className={classNames(
         "flex items-center mt-4 border p-4 border-gray-400 text-gray-700 ease-in-out duration-300 hover:border-gray-800 hover:bg-gray-800 hover:text-gray-50",
-        props.className,
+        rest.className,
       )}
     >
-      {props.leftAdornment}
-      {props.text}
-      {props.rightAdornment}
+      {leftAdornment}
+      {text}
+      {rightAdornment}
     </button>
   )
 }

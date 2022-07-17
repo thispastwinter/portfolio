@@ -1,7 +1,8 @@
 import decoratorCentered from "@storybook/addon-centered"
 import { Story } from "@storybook/react"
 import { ComponentProps } from "react"
-import { ContentBlock, ContentBlockProps } from "./ContentBlock"
+import { ContentBlockProps } from "../../types/ContentBlockProps"
+import { ContentBlock } from "./ContentBlock"
 
 /**
  * See Storybook Docs: Writing Stories

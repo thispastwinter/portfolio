@@ -22,6 +22,7 @@ export function Projects() {
 
   return (
     <div className="flex flex-col">
+      <p className="mb-10 text-2xl font-medium">Recent Work</p>
       <div className="grid lg:grid-rows lg:grid-flow-col gap-4 md:gap-6 max-h-full">
         {data?.map((project, index) => (
           <div

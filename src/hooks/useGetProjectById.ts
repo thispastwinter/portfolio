@@ -6,7 +6,7 @@ export function useGetProjectById(id: string) {
   const { data, isLoading, error } = useQuery(
     ProjectQueryKeys.byId(id),
     () => APIService.getProjectById(id),
-    { useErrorBoundary: true, onError: (err) => console.log(err) },
+    { useErrorBoundary: true },
   )
 
   return { data, isLoading, error }
