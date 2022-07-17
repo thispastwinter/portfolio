@@ -5,13 +5,14 @@ import { useGetArticleByName } from "../../hooks/useGetArticleByName"
 
 interface ArticleProps {
   articleName?: string
+  bypassLoadingSpinner?: boolean
 }
 
-export function Article({ articleName }: ArticleProps) {
+export function Article({ articleName, bypassLoadingSpinner }: ArticleProps) {
   const { name } = useParams<{ name: string }>()
   const { data, isLoading } = useGetArticleByName(articleName ?? name ?? "")
 
-  if (isLoading) {
+  if (isLoading && !bypassLoadingSpinner) {
     return (
       <div className="flex justify-center items-center h-[100vh] md:h-auto">
         <Spinner />

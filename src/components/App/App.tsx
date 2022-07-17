@@ -4,12 +4,12 @@ import { ErrorBoundary } from "react-error-boundary"
 import { ReactNode } from "react"
 import { MainLayout } from "../../layouts/MainLayout"
 import { Article } from "../../pages/Article"
-import { Main } from "../../pages/Main"
 import { ProjectDetail } from "../../pages/ProjectDetail"
 import { Routes as AvailableRoutes } from "../../constants/Routes"
 import { ErrorPage } from "../../pages/ErrorPage"
 import { CustomErrorObject } from "../../types/CustomErrorObject"
 import { ErrorMessage } from "../../constants/ErrorMessage"
+import { Projects } from "../../pages/Projects"
 
 const client = new QueryClient({
   defaultOptions: {
@@ -62,7 +62,7 @@ export function App() {
             }
           >
             <Route index element={<Navigate to={projects} replace />} />
-            <Route path={projects} element={<Main />} />
+            <Route path={projects} element={<Projects />} />
             <Route path={articleDetail(":name")} element={<Article />} />
             <Route
               path={projectsDetail(":id")}

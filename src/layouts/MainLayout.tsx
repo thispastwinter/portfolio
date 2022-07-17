@@ -18,7 +18,7 @@ export function MainLayout() {
       <Header isHidden={isHidden} />
       <Outlet />
       <Footer>
-        <Article articleName="about" />
+        <Article articleName="about" bypassLoadingSpinner={true} />
       </Footer>
     </div>
   )
