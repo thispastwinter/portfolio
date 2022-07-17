@@ -9,7 +9,7 @@ interface ContentColumnProps {
 
 export function ContentColumn({ content_rows, className }: ContentColumnProps) {
   return (
-    <div className={classNames("flex flex-col gap-y-4", className)}>
+    <div className={classNames("flex flex-col gap-y-6", className)}>
       {content_rows.map(({ id, content_blocks }) => (
         <div key={id} className="flex flex-col lg:flex-row">
           <ContentBlocks contentBlocks={content_blocks || []} />

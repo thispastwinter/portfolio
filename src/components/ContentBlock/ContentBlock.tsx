@@ -61,9 +61,5 @@ const ContentBlockMap: {
 export function ContentBlock({ type, ...rest }: ContentBlockProps) {
   const Content = ContentBlockMap[type]
 
-  return (
-    <div>
-      <Content {...rest} data_testid="content_block" />
-    </div>
-  )
+  return <Content {...rest} data_testid="content_block" />
 }

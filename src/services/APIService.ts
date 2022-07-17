@@ -10,7 +10,7 @@ import { ErrorService } from "./ErrorService"
 
 interface API {
   getProjects: () => Promise<Project[] | undefined>
-  getProjectById: (id: Project["id"]) => Promise<Project | undefined>
+  getProjectById: (id: string | number) => Promise<Project | undefined>
   getArticleByName: (name: Article["name"]) => Promise<Article | undefined>
 }
 
@@ -19,8 +19,10 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_KEY)
 const getProjects: API["getProjects"] = async () => {
   const query = supabase
     .from<Project>("projects")
-    .select("short_description, id, image, name, categories(icon_name, name)")
-    .order("start_date", { ascending: false })
+    .select(
+      "short_description, id, image, name, categories(icon_name, name), start_date, end_date",
+    )
+    .order("start_date", { ascending: true })
     .order("name", { foreignTable: "categories" })
 
   const { data, error, status } = await query
@@ -40,7 +42,7 @@ const getProjectById: API["getProjectById"] = async (id) => {
   const query = supabase
     .from<Project & ContentBlock & ContentRow & ContentColumn>("projects")
     .select(
-      "description, id, image, name, url, categories(icon_name, name), content_columns(id, order, content_rows(id, order, content_blocks(alt_text, display_value, value, type, id)))",
+      "description, id, start_date, end_date, image, name, url, role, categories(icon_name, name), content_columns(id, order, content_rows(id, order, content_blocks(alt_text, display_value, value, type, id)))",
     )
     .order("name", { foreignTable: "categories" })
     .order("order", { foreignTable: "content_columns" })

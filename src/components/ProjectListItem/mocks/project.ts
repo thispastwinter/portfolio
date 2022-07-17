@@ -6,7 +6,7 @@ export const project: Project = {
   name: "Sample",
   start_date: "",
   end_date: "",
-  id: "1",
+  id: 1,
   image: require("../../../assets/images/placeholder.png"),
   categories: [
     {
