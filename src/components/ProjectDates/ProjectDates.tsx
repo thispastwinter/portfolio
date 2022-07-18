@@ -35,7 +35,7 @@ export function ProjectDates({ startDate, endDate }: ProjectDatesProps) {
 
   return (
     <div className="flex items-center mt-2 gap-x-2">
-      <div className="flex items-center border-charcoal border-r-2 pr-2 gap-x-2">
+      <div className="flex items-center border-charcoal border-r pr-2 gap-x-2">
         <p>{formatDate(startDate)}</p>
         <p>-</p>
         <p>{formatDate(endDate)}</p>
