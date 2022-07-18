@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { useMemo } from "react"
-import { differenceInMonths, format } from "date-fns"
 import { ContentContainer } from "../../components/ContentContainer"
 import { Icon } from "../../components/Icon"
 import { Spinner } from "../../components/Spinner"
@@ -9,25 +8,14 @@ import { useGetProjectById } from "../../hooks/useGetProjectById"
 import { useGetProjects } from "../../hooks/useGetProjects"
 import { ErrorService } from "../../services/ErrorService"
 import { Button } from "../../components/Button"
+import { ProjectDates } from "../../components/ProjectDates"
 import { PageButton } from "./PageButton"
-
-const toDate = (dateString: string) => new Date(dateString)
-
-const formatDate = (dateString: string) => {
-  const date = toDate(dateString)
-  return format(date, "MMM yyyy")
-}
 
 export function ProjectDetail() {
   const { id } = useParams<{ id: string }>()
   const { data: currentProject, isLoading } = useGetProjectById(id ?? "")
   const { data: projects } = useGetProjects()
   const navigate = useNavigate()
-
-  const startDate = toDate(currentProject?.start_date || "")
-  const endDate = toDate(currentProject?.end_date || "")
-
-  const numberOfMonths = differenceInMonths(endDate, startDate)
 
   const currentIndex = useMemo(
     () =>
@@ -68,15 +56,11 @@ export function ProjectDetail() {
               src={currentProject.image}
             />
             <div className="flex justify-between md:justify-start md:flex-col gap-y-4 my-4">
-              <a
-                className="flex items-center font-medium"
-                target="_blank"
-                href={currentProject.url}
-                rel="noreferrer"
-              >
-                Website
-                <Icon size={20} className="ml-1" name="arrowUpRight" />
-              </a>
+              <Button
+                to={currentProject.url ?? ""}
+                variant="link"
+                text="Website"
+              />
               <div className="flex gap-x-2">
                 {currentProject.categories.map(({ icon_name, name }) => (
                   <Icon
@@ -95,13 +79,10 @@ export function ProjectDetail() {
                 {currentProject.name}
               </p>
               <p className="font-medium">{currentProject.role}</p>
-              <div className="flex items-center gap-x-2 mt-2">
-                <p>{formatDate(currentProject.start_date)}</p>
-                <p>-</p>
-                <p>{formatDate(currentProject.end_date)}</p>
-                <p>|</p>
-                <p>{numberOfMonths} months</p>
-              </div>
+              <ProjectDates
+                startDate={new Date(currentProject.start_date)}
+                endDate={new Date(currentProject.end_date)}
+              />
             </div>
             <div className="mb-12">
               <p>{currentProject.description}</p>
@@ -124,8 +105,9 @@ export function ProjectDetail() {
         ) : (
           <Button
             text="Home"
+            variant="button"
             onClick={() => navigate(Routes.projects)}
-            leftAdornment={<Icon className="mr-2" name="arrowLeft" />}
+            startIcon={<Icon className="mr-2" name="arrowLeft" />}
           />
         )}
         {nextProject && (

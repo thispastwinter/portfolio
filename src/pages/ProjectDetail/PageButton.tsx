@@ -21,10 +21,11 @@ export function PageButton({
 }: PageButtonProps) {
   return (
     <Button
+      variant="button"
       onClick={() => onProjectClick(project.id)}
       text={project.name}
-      rightAdornment={getRightIcon(variant)}
-      leftAdornment={getLeftIcon(variant)}
+      endIcon={getRightIcon(variant)}
+      startIcon={getLeftIcon(variant)}
     />
   )
 }
