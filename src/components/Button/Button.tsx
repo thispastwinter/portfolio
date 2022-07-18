@@ -70,9 +70,9 @@ export function Button(props: Props) {
       >
         {props.startIcon}
         {props.text}
-        {props.endIcon || (
+        {props.endIcon && !props.startIcon ? (
           <Icon size={20} className="ml-1" name="arrowUpRight" />
-        )}
+        ) : null}
       </a>
     )
   }
