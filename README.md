@@ -1,7 +1,7 @@
 # Crema App - Web 🌐
 
-[![Build Status](https://github.com/cremalab/crema-app-web/workflows/CI/badge.svg)](https://github.com/cremalab/crema-app-web/actions)
-[![codecov](https://codecov.io/gh/cremalab/app-web/branch/develop/graph/badge.svg?token=8epVUIKnmy)](https://codecov.io/gh/cremalab/app-web)
+[![Build Status](https://github.com/cremalab/crema-app-web/workflows/CI/badge.svg)](https://github.com/thispastwinter/portfolio/actions)
+[![codecov](https://codecov.io/gh/cremalab/app-web/branch/develop/graph/badge.svg?token=8epVUIKnmy)](https://github.com/thispastwinter/portfolio)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 This project includes configuration and tooling that conforms to Crema's baseline best-practices for a Web Application.
