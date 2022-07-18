@@ -1,5 +1,5 @@
 .project-list-item:hover .project-list-item-arrow {
-  @apply opacity-60 shadow-sm border border-slate-300 ease-in-out duration-700;
+  @apply opacity-60 shadow-sm border border-slate-300 ease-in-out duration-100;
 }
 
 .project-list-item-arrow {
@@ -7,5 +7,5 @@
 }
 
 .project-list-item:hover {
-  @apply shadow-md ease-in-out duration-700;
+  @apply shadow-md ease-in-out duration-100;
 }
