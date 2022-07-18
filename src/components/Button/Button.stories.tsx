@@ -52,4 +52,5 @@ export const StartIcon = Template.bind({})
 StartIcon.args = {
   startIcon: <Icon className="mr-2" name="linkedin" />,
   text: "Linked In",
+  variant: "button",
 }
