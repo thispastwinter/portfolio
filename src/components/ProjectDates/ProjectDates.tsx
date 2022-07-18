@@ -26,7 +26,6 @@ const getDisplayValue = (years: number, months: number) => {
 }
 
 export function ProjectDates({ startDate, endDate }: ProjectDatesProps) {
-  console.log({ startDate, endDate })
   const { years, months } = getYearsAndMonths(endDate, startDate)
 
   const displayValue = useMemo(
