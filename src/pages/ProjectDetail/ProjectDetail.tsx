@@ -80,8 +80,8 @@ export function ProjectDetail() {
               </p>
               <p className="font-medium">{currentProject.role}</p>
               <ProjectDates
-                start_date={currentProject.start_date}
-                end_date={currentProject.end_date}
+                startDate={new Date(currentProject.start_date)}
+                endDate={new Date(currentProject.end_date)}
               />
             </div>
             <div className="mb-12">

@@ -4,11 +4,9 @@ import { getYearsAndMonths } from "../../utils/getYearsAndMonths"
 import { pluralize } from "../../utils/pluralize"
 
 interface ProjectDatesProps {
-  start_date: string
-  end_date: string
+  startDate: Date
+  endDate: Date
 }
-
-const toDate = (dateString: string) => new Date(dateString)
 
 const formatDate = (date: Date) => {
   return format(date, "MMM yyyy")
@@ -27,10 +25,8 @@ const getDisplayValue = (years: number, months: number) => {
   }
 }
 
-export function ProjectDates({ start_date, end_date }: ProjectDatesProps) {
-  const startDate = toDate(start_date)
-  const endDate = toDate(end_date)
-
+export function ProjectDates({ startDate, endDate }: ProjectDatesProps) {
+  console.log({ startDate, endDate })
   const { years, months } = getYearsAndMonths(endDate, startDate)
 
   const displayValue = useMemo(

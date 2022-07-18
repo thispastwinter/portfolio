@@ -10,12 +10,12 @@ import { ProjectDates } from "./ProjectDates"
 export default {
   title: "Components/ProjectDates",
   decorators: [decoratorCentered],
-  parameters: {
-    controls: {
-      matchers: {
-        start_date: /Date$/,
-        end_date: /Date$/,
-      },
+  argTypes: {
+    startDate: {
+      control: "date",
+    },
+    endDate: {
+      control: "date",
     },
   },
 }
@@ -27,6 +27,6 @@ const Template: ComponentStory<typeof ProjectDates> = (args) => (
 export const Example = Template.bind({})
 
 Example.args = {
-  start_date: "2020-01-01T19:02:29+00:00",
-  end_date: "2021-10-01T18:53:34+00:00",
+  startDate: new Date("2020-01-01T19:02:29+00:00"),
+  endDate: new Date("2021-10-01T18:53:34+00:00"),
 }

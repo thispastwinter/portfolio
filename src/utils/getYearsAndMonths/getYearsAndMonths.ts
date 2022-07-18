@@ -31,7 +31,7 @@ export const getYearsAndMonths = (
       .split(".")
       .map((value, index) => {
         if (index === 1) {
-          return Number(value) / Math.pow(10, 2)
+          return Number(`.${value.slice(0, 2)}`)
         } else {
           return Number(value)
         }
