@@ -77,7 +77,7 @@
     "test:playground:ci": "start-storybook -p 5000 --ci",
     "test:playground:smoketest": "start-storybook --smoke-test",
     "test:types": "tsc",
-    "test:unit": "npm run test --",
+    "test:unit": "cross-env TZ=America/Chicago npm run test --",
     "test:unit:coverage": "npm run test:unit -- --coverage --watchAll=false",
     "test:unit:coverage:watch": "npm run test:unit:coverage -- --watchAll=true",
     "test:analyze": "run-s test:analyze:*",
