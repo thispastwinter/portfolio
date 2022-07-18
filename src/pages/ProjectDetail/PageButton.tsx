@@ -21,7 +21,7 @@ export function PageButton({
 }: PageButtonProps) {
   return (
     <Button
-      component="button"
+      variant="button"
       onClick={() => onProjectClick(project.id)}
       text={project.name}
       endIcon={getRightIcon(variant)}

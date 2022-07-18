@@ -11,12 +11,12 @@ interface DefaultProps {
 }
 
 interface LinkProps extends DefaultProps {
-  component: "a"
+  variant: "link"
   to: string
 }
 
 export interface ButtonProps extends DefaultProps {
-  component: "button"
+  variant: "button"
   onClick: ComponentProps<"button">["onClick"]
 }
 
@@ -26,15 +26,15 @@ export function Button(props: Props) {
   const className = classNames(
     {
       "flex items-center mt-4 border p-4 border-gray-400 text-gray-700 ease-in-out duration-300 hover:border-gray-800 hover:bg-gray-800 hover:text-gray-50":
-        props.component === "button",
+        props.variant === "button",
     },
     {
-      "flex items-center font-bold hover:opacity-60": props.component === "a",
+      "flex items-center font-bold hover:opacity-60": props.variant === "link",
     },
     props.className,
   )
 
-  if (props.component === "button") {
+  if (props.variant === "button") {
     return (
       <button
         data-testid={props.testId}
@@ -70,9 +70,11 @@ export function Button(props: Props) {
       >
         {props.startIcon}
         {props.text}
-        {props.endIcon && !props.startIcon ? (
+        {!props.endIcon && !props.startIcon ? (
           <Icon size={20} className="ml-1" name="arrowUpRight" />
-        ) : null}
+        ) : (
+          props.endIcon
+        )}
       </a>
     )
   }

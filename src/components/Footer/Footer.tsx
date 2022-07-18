@@ -17,12 +17,12 @@ export function Footer({ children }: FooterProps) {
         <p className="text-2xl font-medium">Get to know me</p>
         <div className="flex gap-x-4">
           <Button
-            component="a"
+            variant="link"
             to={URL.github}
             startIcon={<Icon name="github" size={ICON_SIZE} />}
           />
           <Button
-            component="a"
+            variant="link"
             to={URL.linkedIn}
             startIcon={<Icon name="linkedin" size={ICON_SIZE} />}
           />

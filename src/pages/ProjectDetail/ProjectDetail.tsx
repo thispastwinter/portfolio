@@ -58,7 +58,7 @@ export function ProjectDetail() {
             <div className="flex justify-between md:justify-start md:flex-col gap-y-4 my-4">
               <Button
                 to={currentProject.url ?? ""}
-                component="a"
+                variant="link"
                 text="Website"
               />
               <div className="flex gap-x-2">
@@ -105,7 +105,7 @@ export function ProjectDetail() {
         ) : (
           <Button
             text="Home"
-            component="button"
+            variant="button"
             onClick={() => navigate(Routes.projects)}
             startIcon={<Icon className="mr-2" name="arrowLeft" />}
           />
