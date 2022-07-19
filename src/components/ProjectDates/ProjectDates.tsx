@@ -1,15 +1,11 @@
 import { useMemo } from "react"
-import { format } from "date-fns"
+import { formatDate } from "../../utils/formatDate"
 import { getYearsAndMonths } from "../../utils/getYearsAndMonths"
 import { pluralize } from "../../utils/pluralize"
 
 interface ProjectDatesProps {
   startDate: Date
   endDate: Date
-}
-
-const formatDate = (date: Date) => {
-  return format(date, "MMM yyyy")
 }
 
 const getDisplayValue = (years: number, months: number) => {
@@ -26,12 +22,10 @@ const getDisplayValue = (years: number, months: number) => {
 }
 
 export function ProjectDates({ startDate, endDate }: ProjectDatesProps) {
-  const { years, months } = getYearsAndMonths(endDate, startDate)
-
-  const displayValue = useMemo(
-    () => getDisplayValue(years, months),
-    [years, months],
-  )
+  const displayValue = useMemo(() => {
+    const { years, months } = getYearsAndMonths(endDate, startDate)
+    return getDisplayValue(years, months)
+  }, [endDate, startDate])
 
   return (
     <div className="flex items-center mt-2 gap-x-2">
