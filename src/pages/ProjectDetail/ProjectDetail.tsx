@@ -9,6 +9,7 @@ import { useGetProjects } from "../../hooks/useGetProjects"
 import { ErrorService } from "../../services/ErrorService"
 import { Button } from "../../components/Button"
 import { ProjectDates } from "../../components/ProjectDates"
+import { Tooltip } from "../../components/Tooltip"
 import { PageButton } from "./PageButton"
 
 export function ProjectDetail() {
@@ -63,12 +64,9 @@ export function ProjectDetail() {
               />
               <div className="flex gap-x-2">
                 {currentProject.categories.map(({ icon_name, name }) => (
-                  <Icon
-                    title={name}
-                    size={24}
-                    key={icon_name}
-                    name={icon_name}
-                  />
+                  <Tooltip showArrow placement="bottom" key={name} label={name}>
+                    <Icon size={24} key={icon_name} name={icon_name} />
+                  </Tooltip>
                 ))}
               </div>
             </div>

@@ -2,6 +2,7 @@ import classNames from "classnames"
 import { Project } from "../../types/Project"
 import { Card } from "../Card"
 import { Icon } from "../Icon"
+import { Tooltip } from "../Tooltip"
 import "./index.css"
 
 interface ProjectListItemProps {
@@ -25,13 +26,14 @@ export function ProjectListItem({ project, className }: ProjectListItemProps) {
             {project.categories.length ? (
               <div className="flex gap-x-2">
                 {project.categories.map(({ icon_name, name }) => (
-                  <Icon
-                    data-testid={`category_${name}`}
-                    title={name}
-                    size={20}
-                    key={icon_name}
-                    name={icon_name}
-                  />
+                  <Tooltip showArrow key={name} label={name} placement="bottom">
+                    <Icon
+                      data-testid={`category_${name}`}
+                      size={20}
+                      key={icon_name}
+                      name={icon_name}
+                    />
+                  </Tooltip>
                 ))}
               </div>
             ) : null}
