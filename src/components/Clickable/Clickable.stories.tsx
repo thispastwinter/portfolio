@@ -1,7 +1,7 @@
 import decoratorCentered from "@storybook/addon-centered"
 import { ComponentStory } from "@storybook/react"
 import { Icon } from "../Icon"
-import { Button } from "./Button"
+import { Clickable } from "./Clickable"
 
 /**
  * See Storybook Docs: Writing Stories
@@ -9,11 +9,13 @@ import { Button } from "./Button"
  */
 
 export default {
-  title: "Components/Button",
+  title: "Components/Clickable",
   decorators: [decoratorCentered],
 }
 
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />
+const Template: ComponentStory<typeof Clickable> = (args) => (
+  <Clickable {...args} />
+)
 
 export const ButtonVariant = Template.bind({})
 

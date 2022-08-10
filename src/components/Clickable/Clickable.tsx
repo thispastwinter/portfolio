@@ -8,6 +8,7 @@ interface DefaultProps {
   endIcon?: ReactNode
   className?: string
   testId?: string
+  ariaLabel?: string
 }
 
 interface LinkProps extends DefaultProps {
@@ -15,14 +16,14 @@ interface LinkProps extends DefaultProps {
   to: string
 }
 
-export interface ButtonProps extends DefaultProps {
+export interface ClickableProps extends DefaultProps {
   variant: "button"
   onClick: ComponentProps<"button">["onClick"]
 }
 
-type Props = ButtonProps | LinkProps
+type Props = ClickableProps | LinkProps
 
-export function Button(props: Props) {
+export function Clickable(props: Props) {
   const className = classNames(
     {
       "flex items-center mt-4 border p-4 border-gray-400 text-gray-700 ease-in-out duration-300 hover:border-gray-800 hover:bg-gray-800 hover:text-gray-50":
@@ -37,6 +38,7 @@ export function Button(props: Props) {
   if (props.variant === "button") {
     return (
       <button
+        aria-label={props.ariaLabel}
         data-testid={props.testId}
         onClick={props.onClick}
         className={className}
@@ -47,7 +49,7 @@ export function Button(props: Props) {
       </button>
     )
   } else {
-    const ariaLabel = `navigate to ${props.to}`
+    const ariaLabel = props.ariaLabel || `navigate to ${props.to}`
     const anchorPropsType = props.to?.includes("http") ? "external" : "internal"
     const defaultAnchorProps = {
       href: props.to,

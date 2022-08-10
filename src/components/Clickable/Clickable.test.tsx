@@ -1,16 +1,16 @@
 import userEvent from "@testing-library/user-event"
 import { render, screen } from "../../testing/test-utils"
 import { Icon } from "../Icon"
-import { Button } from "./Button"
+import { Clickable } from "./Clickable"
 
-describe("Button", () => {
+describe("Clickable", () => {
   it("fires onClick callback when clicked", async () => {
     // Arrange
     const onClick = jest.fn()
-    const text = "Hello Button"
+    const text = "Hello Clickable"
 
     // Act
-    render(<Button onClick={onClick} variant="button" text={text} />)
+    render(<Clickable onClick={onClick} variant="button" text={text} />)
     const button = screen.getByText(text) as HTMLButtonElement
 
     await userEvent.click(button)
@@ -24,7 +24,7 @@ describe("Button", () => {
     const text = "Hello Anchor"
 
     // Act
-    render(<Button variant={variant} to="" text={text} />)
+    render(<Clickable variant={variant} to="" text={text} />)
     const anchor = screen.getByText(text)
 
     // Assert
@@ -33,10 +33,10 @@ describe("Button", () => {
   it("renders button element when component prop is 'button'", () => {
     // Arrange
     const variant = "button"
-    const text = "Hello Button"
+    const text = "Hello Clickable"
 
     // Act
-    render(<Button onClick={jest.fn()} variant={variant} text={text} />)
+    render(<Clickable onClick={jest.fn()} variant={variant} text={text} />)
     const button = screen.getByText(text)
 
     // Assert
@@ -47,7 +47,7 @@ describe("Button", () => {
     const iconTestID = "icon_arrowUpRight"
 
     // Act
-    render(<Button variant="link" to="" />)
+    render(<Clickable variant="link" to="" />)
     const received = screen.getByTestId(iconTestID)
 
     // Assert
@@ -62,7 +62,12 @@ describe("Button", () => {
 
     // Act
     render(
-      <Button startIcon={startIcon} endIcon={endIcon} variant="link" to="" />,
+      <Clickable
+        startIcon={startIcon}
+        endIcon={endIcon}
+        variant="link"
+        to=""
+      />,
     )
     const receivedStartIcon = screen.getByTestId(startIconTestID)
     const receivedEndIcon = screen.getByTestId(endIconTestID)

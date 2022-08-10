@@ -8,6 +8,7 @@ export const project: Project = {
   end_date: "",
   id: 1,
   image: require("../../../assets/images/placeholder.png"),
+  image_alt_text: "",
   categories: [
     {
       id: 1,

@@ -1,4 +1,4 @@
-import { Button } from "../../components/Button"
+import { Clickable } from "../../components/Clickable"
 import { Icon } from "../../components/Icon"
 import { Project } from "../../types/Project"
 
@@ -20,7 +20,7 @@ export function PageButton({
   variant = "next",
 }: PageButtonProps) {
   return (
-    <Button
+    <Clickable
       variant="button"
       onClick={() => onProjectClick(project.id)}
       text={project.name}

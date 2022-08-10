@@ -1,9 +1,9 @@
 import { ContentBlockProps } from "../../types/ContentBlockProps"
-import { Button } from "../Button"
+import { Clickable } from "../Clickable"
 
 export function URLBlock(props: Omit<ContentBlockProps, "type">) {
   return (
-    <Button
+    <Clickable
       variant="link"
       className={props.className}
       testId={props.data_testid}

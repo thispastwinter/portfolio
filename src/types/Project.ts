@@ -11,6 +11,7 @@ export type Project = {
   role?: string
   url?: string
   image?: string
+  image_alt_text: string
   categories: Category[]
   content_columns: ContentColumn[]
 }
