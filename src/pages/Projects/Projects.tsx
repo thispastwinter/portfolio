@@ -1,15 +1,25 @@
+import { useQueryClient } from "react-query"
 import { useNavigate } from "react-router-dom"
 import { ProjectListItem } from "../../components/ProjectListItem"
 import { Spinner } from "../../components/Spinner"
+import { ProjectQueryKeys } from "../../constants/QueryKeys"
 import { Routes } from "../../constants/Routes"
 import { useGetProjects } from "../../hooks/useGetProjects"
+import { APIService } from "../../services/APIService"
 
 export function Projects() {
   const { data, isLoading } = useGetProjects()
+  const queryClient = useQueryClient()
   const navigate = useNavigate()
 
   const goToProject = (id: number) => {
     navigate(Routes.projectsDetail(id))
+  }
+
+  const prefetchProject = async (id: number) => {
+    await queryClient.prefetchQuery(ProjectQueryKeys.byId(id), () =>
+      APIService.getProjectById(id),
+    )
   }
 
   if (isLoading) {
@@ -27,6 +37,7 @@ export function Projects() {
         {data?.map((project) => (
           <div
             role="button"
+            onMouseEnter={() => prefetchProject(project.id)}
             key={project.id}
             tabIndex={0}
             onKeyDown={({ key }) =>
