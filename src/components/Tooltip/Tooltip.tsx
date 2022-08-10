@@ -1,5 +1,6 @@
 import { Placement } from "@popperjs/core"
 import {
+  AriaAttributes,
   CSSProperties,
   KeyboardEvent,
   ReactNode,
@@ -11,11 +12,10 @@ import { usePopper } from "react-popper"
 import { Transition, TransitionStatus } from "react-transition-group"
 import classes from "./Tooltip.module.css"
 
-interface TooltipProps {
+type TooltipProps = {
   children: ReactNode
   label: string
   fontSize?: number
-  ariaDescribedBy?: string
   animationDuration?: number
   alwaysShow?: boolean
   showArrow?: boolean
@@ -25,13 +25,12 @@ interface TooltipProps {
   enterDelay?: number
   exitDelay?: number
   hideOnClick?: boolean
-}
+} & Pick<AriaAttributes, "aria-describedby">
 
 export function Tooltip({
   children,
   label,
   fontSize = 14,
-  ariaDescribedBy,
   animationDuration = 300,
   showArrow,
   alwaysShow,
@@ -41,6 +40,7 @@ export function Tooltip({
   enterDelay,
   exitDelay,
   hideOnClick,
+  ...aria
 }: TooltipProps) {
   const enterTimeout = useRef<NodeJS.Timeout>()
   const exitTimeout = useRef<NodeJS.Timeout>()
@@ -73,7 +73,6 @@ export function Tooltip({
       },
     ],
     placement,
-    strategy: "fixed",
   })
 
   const handleShow = () => setIsOpen(true)
@@ -127,20 +126,22 @@ export function Tooltip({
       <span
         data-testid="tooltip_span"
         role={hideOnClick ? "button" : "none"}
-        aria-describedby={ariaDescribedBy}
         tabIndex={0}
         onKeyDown={handleKeyDown}
         onClick={handleClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         ref={setAnchorElement}
+        {...aria}
       >
         {children}
+        <span className={classes.screenReader}>{label}</span>
       </span>
       <Transition in={isOpen || alwaysShow} timeout={animationDuration}>
         {(status) => (
           <span
-            id={ariaDescribedBy}
+            data-testid="tooltip"
+            id={aria["aria-describedby"]}
             role="tooltip"
             ref={setBoxElement}
             style={{

@@ -16,7 +16,9 @@ export function MainLayout() {
   return (
     <div className="flex flex-col m-4 md:m-6">
       <Header isHidden={isHidden} />
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
       <Footer>
         <Article articleName="about" bypassLoadingSpinner={true} />
       </Footer>

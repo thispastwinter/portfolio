@@ -15,17 +15,18 @@ export function Header({ isHidden = false }: HeaderProps) {
   const child = !isHidden ? (
     <div className="mb-16">
       <div className="mb-4">
-        <div className="flex">
-          <Logo
-            className="cursor-pointer"
-            onClick={goBackToHome}
-            aria-label="Return to home"
-          />
-        </div>
-        <p className="text-2xl font-light text-secondary mt-4">
+        <button
+          className="flex"
+          aria-label="Return to home"
+          onClick={goBackToHome}
+        >
+          <Logo className="cursor-pointer" aria-label="Justin Klaas logo" />
+        </button>
+        <h1 className="sr-only">Justin Klaas</h1>
+        <h4 className="text-2xl font-light text-secondary mt-4">
           application developer specializing in React-Native, GraphQL, and
           Typescript.
-        </p>
+        </h4>
       </div>
     </div>
   ) : (
