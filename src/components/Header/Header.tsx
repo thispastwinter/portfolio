@@ -12,7 +12,7 @@ export function Header({ isHidden = false }: HeaderProps) {
     navigate("/")
   }
 
-  return !isHidden ? (
+  const child = !isHidden ? (
     <div className="mb-16">
       <div className="mb-4">
         <div className="flex">
@@ -37,4 +37,5 @@ export function Header({ isHidden = false }: HeaderProps) {
       <p className="text-xl">Home</p>
     </button>
   )
+  return <header>{child}</header>
 }

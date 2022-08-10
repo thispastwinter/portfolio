@@ -24,11 +24,11 @@ export function Projects() {
     <div className="flex flex-col">
       <p className="mb-10 text-2xl font-medium">Recent Work</p>
       <div className="grid lg:grid-rows lg:grid-flow-col gap-4 md:gap-6 max-h-full">
-        {data?.map((project, index) => (
+        {data?.map((project) => (
           <div
             role="button"
             key={project.id}
-            tabIndex={index}
+            tabIndex={0}
             onKeyDown={({ key }) =>
               key.toLowerCase() === "enter" && goToProject(project.id)
             }

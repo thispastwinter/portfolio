@@ -2,7 +2,7 @@ import classNames from "classnames"
 import { Project } from "../../types/Project"
 import { Card } from "../Card"
 import { Icon } from "../Icon"
-import { Tooltip } from "../Tooltip"
+import { ProjectCategories } from "../ProjectCategories"
 import "./index.css"
 
 interface ProjectListItemProps {
@@ -24,18 +24,7 @@ export function ProjectListItem({ project, className }: ProjectListItemProps) {
           <p>{project.short_description}</p>
           <div className="flex items-end justify-between mt-auto mb-2">
             {project.categories.length ? (
-              <div className="flex gap-x-2">
-                {project.categories.map(({ icon_name, name }) => (
-                  <Tooltip showArrow key={name} label={name} placement="bottom">
-                    <Icon
-                      data-testid={`category_${name}`}
-                      size={20}
-                      key={icon_name}
-                      name={icon_name}
-                    />
-                  </Tooltip>
-                ))}
-              </div>
+              <ProjectCategories categories={project.categories} size="sm" />
             ) : null}
             <div className="project-list-item-arrow">
               <Icon name="arrowRight" size={24} />
