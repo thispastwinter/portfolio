@@ -15,7 +15,7 @@ export function Footer({ children }: FooterProps) {
     <footer>
       <Card className="mt-10 md:mt-16 px-10 md:px-20 bg-transparent border border-charcoal py-10 mb-10 text-charcoal">
         <div className="flex items-center justify-between border-b-2 pb-10 mb-10">
-          <p className="text-2xl font-medium">Get to know me</p>
+          <h6 className="text-2xl font-medium">Get to know me</h6>
           <div className="flex gap-x-4">
             <Clickable
               variant="link"
