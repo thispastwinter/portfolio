@@ -22,12 +22,23 @@ export interface ClickableProps extends DefaultProps {
   onHover?: ComponentProps<"button">["onMouseEnter"]
 }
 
+const getHoverAndFocusClasses = () => {
+  const baseStyles = ["border-gray-800", "bg-gray-800", "text-gray-50"] as const
+  const hoverArray = baseStyles.map(
+    (baseStyle) => `hover:${baseStyle}` as const,
+  )
+  const focusArray = baseStyles.map(
+    (baseStyle) => `focus:${baseStyle}` as const,
+  )
+  return [...hoverArray, ...focusArray].join(" ")
+}
+
 type Props = ClickableProps | LinkProps
 
 export function Clickable(props: Props) {
   const className = classNames(
     {
-      "flex items-center mt-4 border p-4 border-gray-400 text-gray-700 ease-in-out duration-300 hover:border-gray-800 hover:bg-gray-800 hover:text-gray-50":
+      [`flex items-center mt-4 border p-4 border-gray-400 text-gray-700 ease-in-out duration-300 ${getHoverAndFocusClasses()}`]:
         props.variant === "button",
     },
     {

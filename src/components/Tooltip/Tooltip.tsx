@@ -132,10 +132,11 @@ export function Tooltip({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         ref={setAnchorElement}
+        // enables screen reader to read out tootlip content without displaying it
+        aria-label={label}
         {...aria}
       >
         {children}
-        <span className={classes.screenReader}>{label}</span>
       </span>
       <Transition in={isOpen || alwaysShow} timeout={animationDuration}>
         {(status) => (
