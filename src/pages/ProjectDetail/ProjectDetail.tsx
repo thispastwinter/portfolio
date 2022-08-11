@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { useMemo } from "react"
 import { useQueryClient } from "react-query"
+import { Helmet } from "react-helmet"
 import { ContentContainer } from "../../components/ContentContainer"
 import { Icon } from "../../components/Icon"
 import { Routes } from "../../constants/Routes"
@@ -52,6 +53,9 @@ export function ProjectDetail() {
 
   return (
     <div className="flex flex-col">
+      <Helmet>
+        <title>Justin Klaas | {currentProject.name}</title>
+      </Helmet>
       <div className="flex flex-wrap md:flex-nowrap">
         <div className="flex flex-wrap md:flex-nowrap">
           <div className="flex flex-col md:pr-4 max-w-lg w-full md:mr-20">

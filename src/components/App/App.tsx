@@ -16,6 +16,7 @@ export function App() {
             style-src 'self' 'unsafe-inline'; 
           `}
         />
+        <title>Justin Klaas</title>
       </Helmet>
       <Providers />
     </>
