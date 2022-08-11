@@ -9,7 +9,7 @@ export function App() {
         <meta
           httpEquiv="Content-Security-Policy"
           content={`
-            connect-src 'self' ${SUPABASE_URL} 
+            connect-src 'self' ${SUPABASE_URL}; 
             default-src 'self'; 
             base-uri 'none'; 
             object-src 'none'; 
