@@ -36,10 +36,12 @@ const getHoverAndFocusClasses = () => {
 type Props = ClickableProps | LinkProps
 
 export function Clickable(props: Props) {
+  const hoverAndFocusClasses = getHoverAndFocusClasses()
   const className = classNames(
     {
-      [`flex items-center mt-4 border p-4 border-gray-400 text-gray-700 ease-in-out duration-300 ${getHoverAndFocusClasses()}`]:
+      "flex items-center mt-4 border p-4 border-gray-400 text-gray-700 ease-in-out duration-300":
         props.variant === "button",
+      [hoverAndFocusClasses]: props.variant === "button",
     },
     {
       "flex items-center font-bold hover:opacity-60": props.variant === "link",

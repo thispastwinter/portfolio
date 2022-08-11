@@ -12,7 +12,7 @@ import { usePopper } from "react-popper"
 import { Transition, TransitionStatus } from "react-transition-group"
 import classes from "./Tooltip.module.css"
 
-type TooltipProps = {
+interface TooltipProps extends Pick<AriaAttributes, "aria-describedby"> {
   children: ReactNode
   label: string
   fontSize?: number
@@ -25,8 +25,7 @@ type TooltipProps = {
   enterDelay?: number
   exitDelay?: number
   hideOnClick?: boolean
-} & Pick<AriaAttributes, "aria-describedby">
-
+}
 export function Tooltip({
   children,
   label,
