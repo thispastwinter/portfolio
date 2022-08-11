@@ -10,7 +10,7 @@ export function App() {
           httpEquiv="Content-Security-Policy"
           content={`
             connect-src 'self' ${SUPABASE_URL}; 
-            default-src 'self'; 
+            img-src 'self' ${SUPABASE_URL};
             base-uri 'none'; 
             object-src 'none'; 
             style-src 'self' 'unsafe-inline'; 
