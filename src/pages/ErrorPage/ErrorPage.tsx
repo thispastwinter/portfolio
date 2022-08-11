@@ -17,10 +17,10 @@ export function ErrorPage({ status, message, reset }: ErrorProps) {
   return (
     <>
       <div className="flex flex-col items-center text-center gap-y-8 mt-10">
-        <p className="font-display2 text-8xl">{status}</p>
-        <p className="font-display2 text-6xl">
+        <h4 className="font-display2 text-8xl">{status}</h4>
+        <h6 className="font-display2 text-6xl">
           {message ?? "Hey, what are you doing here?"}
-        </p>
+        </h6>
       </div>
     </>
   )

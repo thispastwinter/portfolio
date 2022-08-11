@@ -19,6 +19,7 @@ interface LinkProps extends DefaultProps {
 export interface ClickableProps extends DefaultProps {
   variant: "button"
   onClick: ComponentProps<"button">["onClick"]
+  onHover?: ComponentProps<"button">["onMouseEnter"]
 }
 
 type Props = ClickableProps | LinkProps

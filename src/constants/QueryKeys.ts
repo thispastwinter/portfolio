@@ -1,6 +1,6 @@
 export const ProjectQueryKeys = {
   all: ["projects"] as const,
-  byId: (id: string) => [ProjectQueryKeys.all, id] as const,
+  byId: (id: string | number) => [ProjectQueryKeys.all, String(id)] as const,
 }
 
 export const ArticleQueryKeys = {

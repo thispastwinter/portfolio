@@ -5,6 +5,7 @@ import { Project } from "../../types/Project"
 interface PageButtonProps {
   project: Project
   onProjectClick: (id: Project["id"]) => void
+  onProjectHover: (id: Project["id"]) => void
   variant?: "next" | "previous"
 }
 
@@ -17,11 +18,13 @@ const getLeftIcon = (variant: PageButtonProps["variant"]) =>
 export function PageButton({
   project,
   onProjectClick,
+  onProjectHover,
   variant = "next",
 }: PageButtonProps) {
   return (
     <Clickable
       variant="button"
+      onHover={() => onProjectHover(project.id)}
       onClick={() => onProjectClick(project.id)}
       text={project.name}
       endIcon={getRightIcon(variant)}

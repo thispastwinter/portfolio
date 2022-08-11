@@ -24,7 +24,7 @@ export function ProjectCategories({
     <div className="flex gap-x-2">
       {categories.map(({ icon_name, name }) => (
         <Tooltip
-          ariaDescribedBy={`image of ${name}`}
+          aria-describedby={`image of ${name}`}
           fontSize={fontSize}
           showArrow
           key={name}

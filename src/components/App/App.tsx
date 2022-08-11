@@ -1,19 +1,36 @@
 import { QueryClient, QueryClientProvider } from "react-query"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import { ErrorBoundary } from "react-error-boundary"
-import { ReactNode } from "react"
+import { ReactNode, Suspense, lazy } from "react"
 import { MainLayout } from "../../layouts/MainLayout"
-import { Article } from "../../pages/Article"
-import { ProjectDetail } from "../../pages/ProjectDetail"
 import { Routes as AvailableRoutes } from "../../constants/Routes"
 import { ErrorPage } from "../../pages/ErrorPage"
 import { CustomErrorObject } from "../../types/CustomErrorObject"
 import { ErrorMessage } from "../../constants/ErrorMessage"
 import { Projects } from "../../pages/Projects"
+import { Loader } from "../Loader"
+
+const ProjectDetail = lazy(() =>
+  import("../../pages/ProjectDetail").then((module) => ({
+    default: module.ProjectDetail,
+  })),
+)
+const Article = lazy(() =>
+  import("../../pages/Article").then((module) => ({ default: module.Article })),
+)
 
 const client = new QueryClient({
   defaultOptions: {
     queries: {
+      /* 
+        We don't need to be aggressive here
+        this is a portfolio with very static data
+      */
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      // Stale after 24 hours
+      staleTime: 86400 * 1000,
       retry(failureCount, err) {
         const error = err as CustomErrorObject
         const status = error.status
@@ -63,12 +80,23 @@ export function App() {
           >
             <Route index element={<Navigate to={projects} replace />} />
             <Route path={projects} element={<Projects />} />
-            <Route path={articleDetail(":name")} element={<Article />} />
+            <Route
+              path={articleDetail(":name")}
+              element={
+                <ErrorBoundaryWrapper>
+                  <Suspense fallback={<Loader />}>
+                    <Article />
+                  </Suspense>
+                </ErrorBoundaryWrapper>
+              }
+            />
             <Route
               path={projectsDetail(":id")}
               element={
                 <ErrorBoundaryWrapper>
-                  <ProjectDetail />
+                  <Suspense fallback={<Loader />}>
+                    <ProjectDetail />
+                  </Suspense>
                 </ErrorBoundaryWrapper>
               }
             />

@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom"
 import { useMemo } from "react"
+import { useQueryClient } from "react-query"
 import { ContentContainer } from "../../components/ContentContainer"
 import { Icon } from "../../components/Icon"
-import { Spinner } from "../../components/Spinner"
 import { Routes } from "../../constants/Routes"
 import { useGetProjectById } from "../../hooks/useGetProjectById"
 import { useGetProjects } from "../../hooks/useGetProjects"
@@ -10,12 +10,16 @@ import { ErrorService } from "../../services/ErrorService"
 import { Clickable } from "../../components/Clickable"
 import { ProjectDates } from "../../components/ProjectDates"
 import { ProjectCategories } from "../../components/ProjectCategories"
+import { Loader } from "../../components/Loader"
+import { ProjectQueryKeys } from "../../constants/QueryKeys"
+import { APIService } from "../../services/APIService"
 import { PageButton } from "./PageButton"
 
 export function ProjectDetail() {
   const { id } = useParams<{ id: string }>()
   const { data: currentProject, isLoading } = useGetProjectById(id ?? "")
   const { data: projects } = useGetProjects()
+  const queryClient = useQueryClient()
   const navigate = useNavigate()
 
   const currentIndex = useMemo(
@@ -30,13 +34,7 @@ export function ProjectDetail() {
 
   const nextProject = projects?.[currentIndex + 1]
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-[100vh] md:h-auto">
-        <Spinner />
-      </div>
-    )
-  }
+  if (isLoading) return <Loader />
 
   if (!currentProject) {
     throw ErrorService.createError({ dataType: "project", status: 404 })
@@ -44,6 +42,12 @@ export function ProjectDetail() {
 
   const onProjectClick = (id: number) => {
     navigate(Routes.projectsDetail(id))
+  }
+
+  const onProjectHover = async (id: number) => {
+    await queryClient.prefetchQuery(ProjectQueryKeys.byId(id), () =>
+      APIService.getProjectById(id),
+    )
   }
 
   return (
@@ -93,6 +97,7 @@ export function ProjectDetail() {
       <div className="flex items-center gap-x-4 justify-between md:justify-end mt-10">
         {previousProject ? (
           <PageButton
+            onProjectHover={onProjectHover}
             onProjectClick={onProjectClick}
             project={previousProject}
             variant="previous"
@@ -107,6 +112,7 @@ export function ProjectDetail() {
         )}
         {nextProject && (
           <PageButton
+            onProjectHover={onProjectHover}
             onProjectClick={onProjectClick}
             project={nextProject}
             variant="next"

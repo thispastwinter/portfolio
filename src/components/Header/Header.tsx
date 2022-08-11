@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom"
+import { KeyboardEvent } from "react"
 import { Icon } from "../Icon"
 import { ReactComponent as Logo } from "../../assets/images/logo.svg"
 
@@ -12,20 +13,28 @@ export function Header({ isHidden = false }: HeaderProps) {
     navigate("/")
   }
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter") goBackToHome()
+  }
+
   const child = !isHidden ? (
     <div className="mb-16">
       <div className="mb-4">
-        <div className="flex">
-          <Logo
-            className="cursor-pointer"
-            onClick={goBackToHome}
-            aria-label="Return to home"
-          />
+        <div
+          role="button"
+          tabIndex={0}
+          onKeyDown={handleKeyDown}
+          className="flex"
+          aria-label="Return to home"
+          onClick={goBackToHome}
+        >
+          <Logo aria-label="Justin Klaas logo" />
         </div>
-        <p className="text-2xl font-light text-secondary mt-4">
+        <h1 className="sr-only">Justin Klaas</h1>
+        <h4 className="text-2xl font-light text-secondary mt-4">
           application developer specializing in React-Native, GraphQL, and
           Typescript.
-        </p>
+        </h4>
       </div>
     </div>
   ) : (
