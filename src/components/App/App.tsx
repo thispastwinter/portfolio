@@ -5,18 +5,17 @@ import { Providers } from "../Providers"
 export function App() {
   return (
     <>
-      <Helmet>
+      <Helmet defaultTitle="Justin Klaas">
         <meta
           httpEquiv="Content-Security-Policy"
           content={`
             connect-src 'self' ${SUPABASE_URL}; 
             img-src 'self' ${SUPABASE_URL};
-            base-uri 'none'; 
             object-src 'none'; 
             style-src 'self' 'unsafe-inline'; 
+            script-src 'self';
           `}
         />
-        <title>Justin Klaas</title>
       </Helmet>
       <Providers />
     </>
