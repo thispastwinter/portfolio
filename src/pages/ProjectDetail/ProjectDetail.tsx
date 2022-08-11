@@ -2,7 +2,6 @@ import { useNavigate, useParams } from "react-router-dom"
 import { useMemo } from "react"
 import { ContentContainer } from "../../components/ContentContainer"
 import { Icon } from "../../components/Icon"
-import { Spinner } from "../../components/Spinner"
 import { Routes } from "../../constants/Routes"
 import { useGetProjectById } from "../../hooks/useGetProjectById"
 import { useGetProjects } from "../../hooks/useGetProjects"
@@ -10,6 +9,7 @@ import { ErrorService } from "../../services/ErrorService"
 import { Clickable } from "../../components/Clickable"
 import { ProjectDates } from "../../components/ProjectDates"
 import { ProjectCategories } from "../../components/ProjectCategories"
+import { Loader } from "../../components/Loader"
 import { PageButton } from "./PageButton"
 
 export function ProjectDetail() {
@@ -30,13 +30,7 @@ export function ProjectDetail() {
 
   const nextProject = projects?.[currentIndex + 1]
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-[100vh] md:h-auto">
-        <Spinner />
-      </div>
-    )
-  }
+  if (isLoading) return <Loader />
 
   if (!currentProject) {
     throw ErrorService.createError({ dataType: "project", status: 404 })

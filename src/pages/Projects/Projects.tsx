@@ -1,7 +1,7 @@
 import { useQueryClient } from "react-query"
 import { useNavigate } from "react-router-dom"
+import { Loader } from "../../components/Loader"
 import { ProjectListItem } from "../../components/ProjectListItem"
-import { Spinner } from "../../components/Spinner"
 import { ProjectQueryKeys } from "../../constants/QueryKeys"
 import { Routes } from "../../constants/Routes"
 import { useGetProjects } from "../../hooks/useGetProjects"
@@ -22,13 +22,7 @@ export function Projects() {
     )
   }
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center">
-        <Spinner />
-      </div>
-    )
-  }
+  if (isLoading) return <Loader />
 
   return (
     <div className="flex flex-col">
