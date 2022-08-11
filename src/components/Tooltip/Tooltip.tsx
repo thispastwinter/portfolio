@@ -137,7 +137,6 @@ export function Tooltip({
         {...aria}
       >
         {children}
-        <span className={classes.screenReader}>{label}</span>
       </span>
       <Transition in={isOpen || alwaysShow} timeout={animationDuration}>
         {(status) => (
