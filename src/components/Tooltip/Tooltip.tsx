@@ -26,6 +26,7 @@ interface TooltipProps extends Pick<AriaAttributes, "aria-describedby"> {
   exitDelay?: number
   hideOnClick?: boolean
 }
+
 export function Tooltip({
   children,
   label,
@@ -72,6 +73,7 @@ export function Tooltip({
       },
     ],
     placement,
+    strategy: "fixed",
   })
 
   const handleShow = () => setIsOpen(true)
@@ -113,7 +115,7 @@ export function Tooltip({
   }
 
   const transitionStyles: { [key in TransitionStatus]: CSSProperties } = {
-    entering: { opacity: 1 },
+    entering: { opacity: 0 },
     entered: { opacity: 1 },
     exited: {},
     exiting: {},
@@ -131,18 +133,21 @@ export function Tooltip({
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         ref={setAnchorElement}
-        // enables screen reader to read out tootlip content without displaying it
         aria-label={label}
         {...aria}
       >
         {children}
       </span>
-      <Transition in={isOpen || alwaysShow} timeout={animationDuration}>
+      <Transition
+        unmountOnExit
+        in={isOpen || alwaysShow}
+        timeout={animationDuration}
+      >
         {(status) => (
           <span
-            data-testid="tooltip"
             id={aria["aria-describedby"]}
             role="tooltip"
+            data-testid="tooltip"
             ref={setBoxElement}
             style={{
               ...styles.popper,
